@@ -90,11 +90,11 @@ test('Skademeldingskjema etter kollisjon', async ({ page }) => {
     await page.locator('#verksted').fill('Kvikk Fiks AS');
     await page.locator('#verksted').press('Tab');
 
-    await page.getByText('Last opp skademelding og bilder');
     await page.getByRole('button', { name: 'Velg filer' }).click();
     const fileChooserPromise = page.waitForEvent('filechooser');
+    await page.getByText('Last opp skademelding og bilder').click();
     const fileChooser = await fileChooserPromise;
-
+    await fileChooser.setFiles(path.join(__dirname, 'myfile.pdf'));
 
     await page.getByRole('button', { name: 'Send inn' }).click();
 })
@@ -130,12 +130,8 @@ test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
     await page.locator('#kontaktTelefon').fill('22334455');
     await page.locator('#kontaktTelefon').press('Tab');
     /** */
-    await page.locator('#skadeDato');
-    await page.getByTestId('jkl-icon-button').click();
-    await page.getByLabel('Velg år').selectOption('2024');
-    await page.getByLabel('Velg måned').selectOption('7');
-    await page.getByLabel('22. august').click();
-
+    await page.getByTestId('jkl-datepicker__trigger').click();
+    await page.getByTestId('jkl-datepicker__input').fill('20.03.2025');
     await page.getByRole('button', { name: 'Fortsett' }).click();
     
     /** ----------------------------  */
@@ -188,10 +184,13 @@ test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
     await page.locator('#verksted').press('Tab');
     await page.locator('#skademelding').click();
     
-    await page.getByText('Last opp skademelding og bilder');
     await page.getByRole('button', { name: 'Velg filer' }).click();
     const fileChooserPromise = page.waitForEvent('filechooser');
+    await page.getByText('Last opp skademelding og bilder').click();
     const fileChooser = await fileChooserPromise;
+    await fileChooser.setFiles(path.join(__dirname, 'myfile.pdf'));
+
+    await page.getByRole('button', { name: 'Send inn' }).click();
 })
 
 
@@ -226,11 +225,9 @@ test('Skademeldingskjema etter tyveri/innbrudd', async ({ page }) => {
     await page.locator('#kontaktTelefon').fill('22334455');
     await page.locator('#kontaktTelefon').press('Tab');
     /** */
-    await page.locator('#skadeDato');
-    await page.getByTestId('jkl-icon-button').click();
-    await page.getByLabel('Velg år').selectOption('2024');
-    await page.getByLabel('Velg måned').selectOption('7');
-    await page.getByLabel('22. august').click();
+    await page.getByTestId('jkl-datepicker__trigger').click();
+    await page.getByTestId('jkl-datepicker__input').fill('20.03.2025');
+    await page.getByRole('button', { name: 'Fortsett' }).click();
 
     await page.getByRole('button', { name: 'Fortsett' }).click();
 
@@ -279,12 +276,12 @@ test('Skademeldingskjema etter tyveri/innbrudd', async ({ page }) => {
     await page.locator('#verksted').fill('Kvikk Fiks AS');
     await page.locator('#verksted').press('Tab');
     await page.locator('#skademelding').click();
-
-    await page.getByText('Last opp skademelding og bilder');
+    
     await page.getByRole('button', { name: 'Velg filer' }).click();
     const fileChooserPromise = page.waitForEvent('filechooser');
+    await page.getByText('Last opp skademelding og bilder').click();
     const fileChooser = await fileChooserPromise;
-
+    await fileChooser.setFiles(path.join(__dirname, 'myfile.pdf'));
 })
 
 
@@ -319,11 +316,9 @@ test('Skademeldingskjema etter andre skader kjøretøy', async ({ page }) => {
     await page.locator('#kontaktTelefon').fill('22334455');
     await page.locator('#kontaktTelefon').press('Tab');
     /** */
-    await page.locator('#skadeDato');
-    await page.getByTestId('jkl-icon-button').click();
-    await page.getByLabel('Velg år').selectOption('2024');
-    await page.getByLabel('Velg måned').selectOption('7');
-    await page.getByLabel('22. august').click();
+    await page.getByTestId('jkl-datepicker__trigger').click();
+    await page.getByTestId('jkl-datepicker__input').fill('20.03.2025');
+    await page.getByRole('button', { name: 'Fortsett' }).click();
 
     await page.getByRole('button', { name: 'Fortsett' }).click();
     
@@ -371,13 +366,12 @@ test('Skademeldingskjema etter andre skader kjøretøy', async ({ page }) => {
     await page.locator('#verksted').fill('Kvikk Fiks AS');
     await page.locator('#verksted').press('Tab');
     await page.locator('#skademelding').click();
-
-    await page.getByText('Last opp skademelding og bilder');
+    
     await page.getByRole('button', { name: 'Velg filer' }).click();
     const fileChooserPromise = page.waitForEvent('filechooser');
+    await page.getByText('Last opp skademelding og bilder').click();
     const fileChooser = await fileChooserPromise;
-    await page.getByText('Upload file').click();
+    await fileChooser.setFiles(path.join(__dirname, 'myfile.pdf'));
 
     /** ----------------------------  */
-
 })
