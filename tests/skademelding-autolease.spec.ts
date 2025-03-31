@@ -93,8 +93,10 @@ test('Skademeldingskjema etter kollisjon', async ({ page }) => {
     await page.getByRole('button', { name: 'Velg filer' }).click();
     const fileChooserPromise = page.waitForEvent('filechooser');
     await page.getByText('Last opp skademelding og bilder').click();
+
     const fileChooser = await fileChooserPromise;
-    await fileChooser.setFiles(path.join(__dirname, 'myfile.pdf'));
+    const handle = page.locator('input[type="file"]');
+    await fileChooser.setFiles('./tests/sample.pdf');
 
     await page.getByRole('button', { name: 'Send inn' }).click();
 })
@@ -183,12 +185,14 @@ test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
     await page.locator('#verksted').fill('Kvikk Fiks AS');
     await page.locator('#verksted').press('Tab');
     await page.locator('#skademelding').click();
-    
+        
     await page.getByRole('button', { name: 'Velg filer' }).click();
     const fileChooserPromise = page.waitForEvent('filechooser');
     await page.getByText('Last opp skademelding og bilder').click();
+
     const fileChooser = await fileChooserPromise;
-    await fileChooser.setFiles(path.join(__dirname, 'myfile.pdf'));
+    const handle = page.locator('input[type="file"]');
+    await handle.setInputFiles('./tests/sample.pdf');
 
     await page.getByRole('button', { name: 'Send inn' }).click();
 })
@@ -227,8 +231,6 @@ test('Skademeldingskjema etter tyveri/innbrudd', async ({ page }) => {
     /** */
     await page.getByTestId('jkl-datepicker__trigger').click();
     await page.getByTestId('jkl-datepicker__input').fill('20.03.2025');
-    await page.getByRole('button', { name: 'Fortsett' }).click();
-
     await page.getByRole('button', { name: 'Fortsett' }).click();
 
     
@@ -276,12 +278,15 @@ test('Skademeldingskjema etter tyveri/innbrudd', async ({ page }) => {
     await page.locator('#verksted').fill('Kvikk Fiks AS');
     await page.locator('#verksted').press('Tab');
     await page.locator('#skademelding').click();
-    
+        
     await page.getByRole('button', { name: 'Velg filer' }).click();
     const fileChooserPromise = page.waitForEvent('filechooser');
     await page.getByText('Last opp skademelding og bilder').click();
+
     const fileChooser = await fileChooserPromise;
-    await fileChooser.setFiles(path.join(__dirname, 'myfile.pdf'));
+    const handle = page.locator('input[type="file"]');
+    await handle.setInputFiles('./tests/sample.pdf');
+
 })
 
 
@@ -370,8 +375,10 @@ test('Skademeldingskjema etter andre skader kjøretøy', async ({ page }) => {
     await page.getByRole('button', { name: 'Velg filer' }).click();
     const fileChooserPromise = page.waitForEvent('filechooser');
     await page.getByText('Last opp skademelding og bilder').click();
+
     const fileChooser = await fileChooserPromise;
-    await fileChooser.setFiles(path.join(__dirname, 'myfile.pdf'));
+    const handle = page.locator('input[type="file"]');
+    await handle.setInputFiles('./tests/sample.pdf');
 
     /** ----------------------------  */
 })
