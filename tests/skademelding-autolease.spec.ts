@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-      
+
 /** Hva har skjedd - (kollisjon | dyr | tyveri | annet) */
 
 /** Kollisjon med annet kjøretøy */
@@ -7,6 +7,7 @@ import { test, expect } from '@playwright/test';
 /** Tyveri/innbrudd */
 /** Andre skader kjøretøy */
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 test('Skademeldingskjema etter kollisjon', async ({ page }) => {
   
@@ -90,13 +91,20 @@ test('Skademeldingskjema etter kollisjon', async ({ page }) => {
     await page.locator('#verksted').fill('Kvikk Fiks AS');
     await page.locator('#verksted').press('Tab');
 
-    await page.getByRole('button', { name: 'Velg filer' }).click();
+    /** ----------- NYTT BEGIN ----------- */
+    await expect(page.locator('#root')).toContainText('Last opp skademelding og bilder');
     const fileChooserPromise = page.waitForEvent('filechooser');
-    await page.getByText('Last opp skademelding og bilder').click();
-
+    await page.getByRole('button', { name: 'Velg filer' }).click();
     const fileChooser = await fileChooserPromise;
-    const handle = page.locator('input[type="file"]');
-    await fileChooser.setFiles('./tests/sample.pdf');
+    await fileChooser.setFiles(path.join(__dirname, 'sampleJPG.jpg'));
+
+    await expect(page.locator('#root')).toContainText('sampleJPG.jpg');
+    //await page.getByText('Last opp skademelding og bilder').click();
+
+    await page.getByRole('button', { name: 'Send inn' }).click();
+    await page.getByText('Saken din er registrert, og').click();
+    await expect(page.getByRole('paragraph')).toContainText('Saken din er registrert, og dette skjer videre: Nå har vi foreløpig de opplysningene vi trenger, og antatt behandlingstid er 2 arbeidsdager. Vi kontakter deg så snart vi har sett på saken din. Du vil få en egen e-post med skadenummeret ditt.');
+    /** ----------- NYTT END ----------- */
 
     await page.getByRole('button', { name: 'Send inn' }).click();
 })
@@ -186,14 +194,21 @@ test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
     await page.locator('#verksted').press('Tab');
     await page.locator('#skademelding').click();
         
-    await page.getByRole('button', { name: 'Velg filer' }).click();
+    /** ----------- NYTT BEGIN ----------- */
+    await expect(page.locator('#root')).toContainText('Last opp skademelding og bilder');
     const fileChooserPromise = page.waitForEvent('filechooser');
-    await page.getByText('Last opp skademelding og bilder').click();
-
+    await page.getByRole('button', { name: 'Velg filer' }).click();
     const fileChooser = await fileChooserPromise;
-    const handle = page.locator('input[type="file"]');
-    await handle.setInputFiles('./tests/sample.pdf');
+    await fileChooser.setFiles(path.join(__dirname, 'sampleJPG.jpg'));
 
+    await expect(page.locator('#root')).toContainText('sampleJPG.jpg');
+    //await page.getByText('Last opp skademelding og bilder').click();
+
+    await page.getByRole('button', { name: 'Send inn' }).click();
+    await page.getByText('Saken din er registrert, og').click();
+    await expect(page.getByRole('paragraph')).toContainText('Saken din er registrert, og dette skjer videre: Nå har vi foreløpig de opplysningene vi trenger, og antatt behandlingstid er 2 arbeidsdager. Vi kontakter deg så snart vi har sett på saken din. Du vil få en egen e-post med skadenummeret ditt.');
+    /** ----------- NYTT END ----------- */
+    
     await page.getByRole('button', { name: 'Send inn' }).click();
 })
 
@@ -279,14 +294,21 @@ test('Skademeldingskjema etter tyveri/innbrudd', async ({ page }) => {
     await page.locator('#verksted').press('Tab');
     await page.locator('#skademelding').click();
         
-    await page.getByRole('button', { name: 'Velg filer' }).click();
+    /** ----------- NYTT BEGIN ----------- */
+    await expect(page.locator('#root')).toContainText('Last opp skademelding og bilder');
     const fileChooserPromise = page.waitForEvent('filechooser');
-    await page.getByText('Last opp skademelding og bilder').click();
-
+    await page.getByRole('button', { name: 'Velg filer' }).click();
     const fileChooser = await fileChooserPromise;
-    const handle = page.locator('input[type="file"]');
-    await handle.setInputFiles('./tests/sample.pdf');
+    await fileChooser.setFiles(path.join(__dirname, 'sampleJPG.jpg'));
 
+    await expect(page.locator('#root')).toContainText('sampleJPG.jpg');
+    //await page.getByText('Last opp skademelding og bilder').click();
+
+    await page.getByRole('button', { name: 'Send inn' }).click();
+    await page.getByText('Saken din er registrert, og').click();
+    await expect(page.getByRole('paragraph')).toContainText('Saken din er registrert, og dette skjer videre: Nå har vi foreløpig de opplysningene vi trenger, og antatt behandlingstid er 2 arbeidsdager. Vi kontakter deg så snart vi har sett på saken din. Du vil få en egen e-post med skadenummeret ditt.');
+    /** ----------- NYTT END ----------- */
+    
 })
 
 
@@ -372,13 +394,18 @@ test('Skademeldingskjema etter andre skader kjøretøy', async ({ page }) => {
     await page.locator('#verksted').press('Tab');
     await page.locator('#skademelding').click();
     
-    await page.getByRole('button', { name: 'Velg filer' }).click();
+    /** ----------- NYTT BEGIN ----------- */
+    await expect(page.locator('#root')).toContainText('Last opp skademelding og bilder');
     const fileChooserPromise = page.waitForEvent('filechooser');
-    await page.getByText('Last opp skademelding og bilder').click();
-
+    await page.getByRole('button', { name: 'Velg filer' }).click();
     const fileChooser = await fileChooserPromise;
-    const handle = page.locator('input[type="file"]');
-    await handle.setInputFiles('./tests/sample.pdf');
+    await fileChooser.setFiles(path.join(__dirname, 'sampleJPG.jpg'));
 
-    /** ----------------------------  */
+    await expect(page.locator('#root')).toContainText('sampleJPG.jpg');
+    //await page.getByText('Last opp skademelding og bilder').click();
+
+    await page.getByRole('button', { name: 'Send inn' }).click();
+    await page.getByText('Saken din er registrert, og').click();
+    await expect(page.getByRole('paragraph')).toContainText('Saken din er registrert, og dette skjer videre: Nå har vi foreløpig de opplysningene vi trenger, og antatt behandlingstid er 2 arbeidsdager. Vi kontakter deg så snart vi har sett på saken din. Du vil få en egen e-post med skadenummeret ditt.');
+    /** ----------- NYTT END ----------- */
 })
