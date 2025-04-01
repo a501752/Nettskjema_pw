@@ -102,14 +102,9 @@ test('Skademeldingskjema etter kollisjon', async ({ page }) => {
     await fileChooser.setFiles(path.join(__dirname, 'sample.pdf'));
 
     await expect(page.locator('#root')).toContainText('sample.pdf');
-    //await page.getByText('Last opp skademelding og bilder').click();
 
     await page.getByRole('button', { name: 'Send inn' }).click();
-    await page.getByText('Saken din er registrert, og').click();
     await expect(page.getByRole('paragraph')).toContainText('Saken din er registrert, og dette skjer videre: Nå har vi foreløpig de opplysningene vi trenger, og antatt behandlingstid er 2 arbeidsdager. Vi kontakter deg så snart vi har sett på saken din. Du vil få en egen e-post med skadenummeret ditt.');
-    /** ----------- NYTT END ----------- */
-
-    await page.getByRole('button', { name: 'Send inn' }).click();
 })
 
 test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
@@ -159,8 +154,11 @@ test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
      */
     await page.locator('label').filter({ hasText: 'Påkjøring av dyr' }).locator('span').first().click();
 
-    const headerPaakjoeringAvDyr = page.locator('h2', { hasText: 'Påkjøring av dyr' });
-    //await expect(headerPaakjoeringAvDyr).toBeVisible();
+    const headerPaakjoeringAvDyr = page.locator('a', { hasText: 'Påkjøring av dyr' });
+    await expect(headerPaakjoeringAvDyr).toBeVisible();
+
+    await page.getByRole('button', { name: 'Fortsett' }).click();
+
 
     await page.locator('#dyrHvor').click();
     await page.locator('#dyrHvor').fill('På veien til byen');
@@ -263,8 +261,9 @@ test('Skademeldingskjema etter tyveri/innbrudd', async ({ page }) => {
     await page.locator('label').filter({ hasText: 'Tyveri/innbrudd' }).locator('span').first().click();
 
     /** ----------------------------  */
-    const headerTyveriInnbrudd = page.locator('h2', { hasText: 'Tyveri/innbrudd' });
+    const headerTyveriInnbrudd = page.locator('a', { hasText: 'Tyveri/innbrudd' });
     await expect(headerTyveriInnbrudd).toBeVisible();
+    await page.getByRole('button', { name: 'Fortsett' }).click();
 
     await page.locator('#tyveriParkert').click();
     await page.locator('#tyveriParkert').fill('Utenfor butikken');
