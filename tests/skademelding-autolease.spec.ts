@@ -1,5 +1,8 @@
 import { test, expect } from '@playwright/test';
 
+import * as path from "node:path";
+import { fileURLToPath as nodeFileURLToPath } from 'url';
+
 /** Hva har skjedd - (kollisjon | dyr | tyveri | annet) */
 
 /** Kollisjon med annet kjøretøy */
@@ -96,7 +99,7 @@ test('Skademeldingskjema etter kollisjon', async ({ page }) => {
     const fileChooserPromise = page.waitForEvent('filechooser');
     await page.getByRole('button', { name: 'Velg filer' }).click();
     const fileChooser = await fileChooserPromise;
-    await fileChooser.setFiles(path.join(__dirname, 'sampleJPG.jpg'));
+    await fileChooser.setFiles(path.join(__dirname, 'sample.pdf'));
 
     await expect(page.locator('#root')).toContainText('sampleJPG.jpg');
     //await page.getByText('Last opp skademelding og bilder').click();
@@ -148,7 +151,6 @@ test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
     const headerHvaHarSkjedd = page.locator('h2', { hasText: 'Hva har skjedd?' });
     await expect(headerHvaHarSkjedd).toBeVisible();
     
-    await page.locator('#aarsak').click();
     /**
     await page.locator('label').filter({ hasText: 'Kollisjon med annet kjøretøy' }).locator('span').first().click();
     await page.locator('label').filter({ hasText: 'Påkjøring av dyr' }).locator('span').first().click();
@@ -252,8 +254,6 @@ test('Skademeldingskjema etter tyveri/innbrudd', async ({ page }) => {
     /** ----------------------------  */
     const headerHvaHarSkjedd = page.locator('h2', { hasText: 'Hva har skjedd?' });
     await expect(headerHvaHarSkjedd).toBeVisible();
-    
-    await page.locator('#aarsak').click();
     /**
     await page.locator('label').filter({ hasText: 'Kollisjon med annet kjøretøy' }).locator('span').first().click();
     await page.locator('label').filter({ hasText: 'Påkjøring av dyr' }).locator('span').first().click();
@@ -346,14 +346,10 @@ test('Skademeldingskjema etter andre skader kjøretøy', async ({ page }) => {
     await page.getByTestId('jkl-datepicker__trigger').click();
     await page.getByTestId('jkl-datepicker__input').fill('20.03.2025');
     await page.getByRole('button', { name: 'Fortsett' }).click();
-
-    await page.getByRole('button', { name: 'Fortsett' }).click();
     
     /** ----------------------------  */
     const headerHvaHarSkjedd = page.locator('h2', { hasText: 'Hva har skjedd?' });
     await expect(headerHvaHarSkjedd).toBeVisible();
-    
-    await page.locator('#aarsak').click();
     /**
     await page.locator('label').filter({ hasText: 'Kollisjon med annet kjøretøy' }).locator('span').first().click();
     await page.locator('label').filter({ hasText: 'Påkjøring av dyr' }).locator('span').first().click();
@@ -409,3 +405,7 @@ test('Skademeldingskjema etter andre skader kjøretøy', async ({ page }) => {
     await expect(page.getByRole('paragraph')).toContainText('Saken din er registrert, og dette skjer videre: Nå har vi foreløpig de opplysningene vi trenger, og antatt behandlingstid er 2 arbeidsdager. Vi kontakter deg så snart vi har sett på saken din. Du vil få en egen e-post med skadenummeret ditt.');
     /** ----------- NYTT END ----------- */
 })
+
+function fileURLToPath(url: string): string {
+    return nodeFileURLToPath(url);
+}
