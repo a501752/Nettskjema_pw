@@ -355,6 +355,7 @@ test('Skademeldingskjema etter andre skader kjøretøy', async ({ page }) => {
     await page.locator('label').filter({ hasText: 'Andre skader kjøretøy' }).locator('span').first().click();
      */
     await page.locator('label').filter({ hasText: 'Andre skader kjøretøy' }).locator('span').first().click();
+    await page.getByRole('button', { name: 'Fortsett' }).click();
 
     await page.locator('#annetHvor').click();
     await page.locator('#annetHvor').fill('Utenfor sykehuset');
