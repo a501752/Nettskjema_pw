@@ -172,12 +172,10 @@ test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
     await page.locator('#dyrHvordan').click();
     await page.locator('#dyrHvordan').fill('Plutselig sto det en bil i veikanten');
     await page.locator('#dyrHvordan').press('Tab');
-    await page.locator('#dyrDekkType').click();
-    await page.locator('#dyrDekkType').filter({ hasText: 'Sommerdekk' }).locator('span').first().click();
-    await page.locator('#dyrDekkType').press('Tab');
-    await page.locator('#dyrMeldtFra').click();
-    await page.locator('#dyrMeldtFra').filter({ hasText: 'Nei' }).locator('span').first().click();
-    await page.locator('#dyrMeldtFra').press('Tab');
+    await page.getByText('Hva slags dekk var det på kjøretøyet?');
+    await page.locator('label').filter({ hasText: 'Sommerdekk' }).locator('span').first().click();
+    await page.getByText('Har du meldt fra til viltnemda eller politiet?');
+    await page.locator('label').filter({hasText: 'Nei'}).locator('span').first().click();
 
     /** ----------------------------  */
     const headerSkader = page.locator('h2', { hasText: 'Skader' });
@@ -369,9 +367,8 @@ test('Skademeldingskjema etter andre skader kjøretøy', async ({ page }) => {
     await page.locator('#annetHvordan').click();
     await page.locator('#annetHvordan').fill('En kampestein rullet ned fra fjellsiden og ut i veien og traff bilen');
     await page.locator('#annetHvordan').press('Tab');
-    await page.locator('#annetDekkType').click();
-    await page.locator('#annetDekkType').filter({ hasText: 'Sommerdekk' }).locator('span').first().click();
-    await page.locator('#annetDekkType').press('Tab');
+    await page.getByText('Hva slags dekk var det på kjøretøyet?');
+    await page.locator('label').filter({ hasText: 'Sommerdekk' }).locator('span').first().click();
 
 
     /** ----------------------------  */
