@@ -185,9 +185,8 @@ test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
     await page.locator('#skader').click();
     await page.locator('#skader').fill('Diger bulk på venstre forskjerm');
     await page.locator('#skader').press('Tab');
-    await page.locator('#verkstedTime').click();
-    await page.locator('#verkstedTime').fill('1');
-    await page.locator('#verkstedTime').press('Tab');
+    await page.getByText('Har du bestilt time på verksted?');
+    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
     await page.locator('#verksted').click();
     await page.locator('#verksted').fill('Kvikk Fiks AS');
     await page.locator('#verksted').press('Tab');
@@ -275,6 +274,7 @@ test('Skademeldingskjema etter tyveri/innbrudd', async ({ page }) => {
     await page.locator('#tyveriSkader').press('Tab');
     await page.getByText('Har du meldt fra til politiet?');
     await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.getByRole('button', { name: 'Fortsett' }).click();
 
 
     /** ----------------------------  */
