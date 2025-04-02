@@ -48,8 +48,6 @@ test('Skademeldingskjema etter kollisjon', async ({ page }) => {
     await page.getByRole('button', { name: 'Fortsett' }).click();
 
     
-    /** ----------------------------  */ 
-
     const headerHvaHarSkjedd = page.locator('h2', { hasText: 'Hva har skjedd?' });
     await expect(headerHvaHarSkjedd).toBeVisible();
 
@@ -57,7 +55,6 @@ test('Skademeldingskjema etter kollisjon', async ({ page }) => {
     await page.locator('label').filter({ hasText: 'Kollisjon med annet kjøretøy' }).locator('span').first().click();
     await page.getByRole('button', { name: 'Fortsett' }).click();
 
-    /** ----------------------------  */
     const headerKollisjonAnnetKjoretoy = page.locator('h2', { hasText: 'Kollisjon med annet kjøretøy' });
     await expect(headerKollisjonAnnetKjoretoy).toBeVisible();
 
@@ -81,7 +78,6 @@ test('Skademeldingskjema etter kollisjon', async ({ page }) => {
     
     await page.getByRole('button', { name: 'Fortsett' }).click();
 
-    /** ----------------------------  */
     const headerSkader = page.locator('h2', { hasText: 'Skader' });
     await expect(headerSkader).toBeVisible();
 
@@ -94,7 +90,6 @@ test('Skademeldingskjema etter kollisjon', async ({ page }) => {
     await page.locator('#verksted').fill('Kvikk Fiks AS');
     await page.locator('#verksted').press('Tab');
 
-    /** ----------- NYTT BEGIN ----------- */
     await expect(page.locator('#root')).toContainText('Last opp skademelding og bilder');
     const fileChooserPromise = page.waitForEvent('filechooser');
     await page.getByRole('button', { name: 'Velg filer' }).click();
@@ -178,7 +173,6 @@ test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
     await page.locator('label').filter({hasText: 'Nei'}).locator('span').first().click();
     await page.getByRole('button', { name: 'Fortsett' }).click();
 
-    /** ----------------------------  */
     const headerSkader = page.locator('h2', { hasText: 'Skader' });
     await expect(headerSkader).toBeVisible();
 
@@ -191,7 +185,6 @@ test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
     await page.locator('#verksted').fill('Kvikk Fiks AS');
     await page.locator('#verksted').press('Tab');
         
-    /** ----------- NYTT BEGIN ----------- */
     await expect(page.locator('#root')).toContainText('Last opp skademelding og bilder');
     const fileChooserPromise = page.waitForEvent('filechooser');
     await page.getByRole('button', { name: 'Velg filer' }).click();
@@ -199,12 +192,10 @@ test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
     await fileChooser.setFiles(path.join(__dirname, 'sampleJPG.jpg'));
 
     await expect(page.locator('#root')).toContainText('sampleJPG.jpg');
-    //await page.getByText('Last opp skademelding og bilder').click();
 
     await page.getByRole('button', { name: 'Send inn' }).click();
     await page.getByText('Saken din er registrert, og').click();
     await expect(page.getByRole('paragraph')).toContainText('Saken din er registrert, og dette skjer videre: Nå har vi foreløpig de opplysningene vi trenger, og antatt behandlingstid er 2 arbeidsdager. Vi kontakter deg så snart vi har sett på saken din. Du vil få en egen e-post med skadenummeret ditt.');
-    /** ----------- NYTT END ----------- */
 })
 
 
@@ -288,7 +279,6 @@ test('Skademeldingskjema etter tyveri/innbrudd', async ({ page }) => {
     await page.locator('#verksted').fill('Kvikk Fiks AS');
     await page.locator('#verksted').press('Tab');
         
-    /** ----------- NYTT BEGIN ----------- */
     await expect(page.locator('#root')).toContainText('Last opp skademelding og bilder');
     const fileChooserPromise = page.waitForEvent('filechooser');
     await page.getByRole('button', { name: 'Velg filer' }).click();
@@ -300,7 +290,6 @@ test('Skademeldingskjema etter tyveri/innbrudd', async ({ page }) => {
     await page.getByRole('button', { name: 'Send inn' }).click();
     await page.getByText('Saken din er registrert, og').click();
     await expect(page.getByRole('paragraph')).toContainText('Saken din er registrert, og dette skjer videre: Nå har vi foreløpig de opplysningene vi trenger, og antatt behandlingstid er 2 arbeidsdager. Vi kontakter deg så snart vi har sett på saken din. Du vil få en egen e-post med skadenummeret ditt.');
-    /** ----------- NYTT END ----------- */
     
 })
 
@@ -369,7 +358,6 @@ test('Skademeldingskjema etter andre skader kjøretøy', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Fortsett' }).click();
 
-    /** ----------------------------  */
     const headerSkader = page.locator('h2', { hasText: 'Skader' });
     await expect(headerSkader).toBeVisible();
 
@@ -388,12 +376,10 @@ test('Skademeldingskjema etter andre skader kjøretøy', async ({ page }) => {
     await fileChooser.setFiles(path.join(__dirname, 'sampleJPG.jpg'));
 
     await expect(page.locator('#root')).toContainText('sampleJPG.jpg');
-    //await page.getByText('Last opp skademelding og bilder').click();
 
     await page.getByRole('button', { name: 'Send inn' }).click();
     await page.getByText('Saken din er registrert, og').click();
     await expect(page.getByRole('paragraph')).toContainText('Saken din er registrert, og dette skjer videre: Nå har vi foreløpig de opplysningene vi trenger, og antatt behandlingstid er 2 arbeidsdager. Vi kontakter deg så snart vi har sett på saken din. Du vil få en egen e-post med skadenummeret ditt.');
-    /** ----------- NYTT END ----------- */
 })
 
 function fileURLToPath(url: string): string {
