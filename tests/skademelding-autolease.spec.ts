@@ -176,6 +176,7 @@ test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
     await page.locator('label').filter({ hasText: 'Sommerdekk' }).locator('span').first().click();
     await page.getByText('Har du meldt fra til viltnemda eller politiet?');
     await page.locator('label').filter({hasText: 'Nei'}).locator('span').first().click();
+    await page.getByRole('button', { name: 'Fortsett' }).click();
 
     /** ----------------------------  */
     const headerSkader = page.locator('h2', { hasText: 'Skader' });
