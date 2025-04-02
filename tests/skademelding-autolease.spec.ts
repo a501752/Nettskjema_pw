@@ -190,7 +190,6 @@ test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
     await page.locator('#verksted').click();
     await page.locator('#verksted').fill('Kvikk Fiks AS');
     await page.locator('#verksted').press('Tab');
-    await page.locator('#skademelding').click();
         
     /** ----------- NYTT BEGIN ----------- */
     await expect(page.locator('#root')).toContainText('Last opp skademelding og bilder');
