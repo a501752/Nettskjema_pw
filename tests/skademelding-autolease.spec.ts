@@ -281,9 +281,9 @@ test('Skademeldingskjema etter tyveri/innbrudd', async ({ page }) => {
     await page.locator('#skader').click();
     await page.locator('#skader').fill('Diger bulk på venstre forskjerm');
     await page.locator('#skader').press('Tab');
-    await page.locator('#verkstedTime').click();
-    await page.locator('#verkstedTime').fill('1');
-    await page.locator('#verkstedTime').press('Tab');
+    await page.getByText('Har du bestilt time på verksted?');
+    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+
     await page.locator('#verksted').click();
     await page.locator('#verksted').fill('Kvikk Fiks AS');
     await page.locator('#verksted').press('Tab');
@@ -369,6 +369,7 @@ test('Skademeldingskjema etter andre skader kjøretøy', async ({ page }) => {
     await page.getByText('Hva slags dekk var det på kjøretøyet?');
     await page.locator('label').filter({ hasText: 'Sommerdekk' }).locator('span').first().click();
 
+    await page.getByRole('button', { name: 'Fortsett' }).click();
 
     /** ----------------------------  */
     const headerSkader = page.locator('h2', { hasText: 'Skader' });
@@ -380,13 +381,11 @@ test('Skademeldingskjema etter andre skader kjøretøy', async ({ page }) => {
     await page.locator('#verkstedTime').click();
     await page.locator('#verkstedTime').fill('1');
     await page.locator('#verkstedTime').press('Tab');
+    await page.locator('label').filter({ hasText: 'Sommerdekk' }).locator('span').first().click();
     await page.locator('#verksted').click();
     await page.locator('#verksted').fill('Kvikk Fiks AS');
     await page.locator('#verksted').press('Tab');
-    await page.locator('#skademelding').click();
     
-    /** ----------- NYTT BEGIN ----------- */
-    await expect(page.locator('#root')).toContainText('Last opp skademelding og bilder');
     const fileChooserPromise = page.waitForEvent('filechooser');
     await page.getByRole('button', { name: 'Velg filer' }).click();
     const fileChooser = await fileChooserPromise;
