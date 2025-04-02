@@ -205,8 +205,6 @@ test('Skademeldingskjema etter påkjøring av dyr', async ({ page }) => {
     await page.getByText('Saken din er registrert, og').click();
     await expect(page.getByRole('paragraph')).toContainText('Saken din er registrert, og dette skjer videre: Nå har vi foreløpig de opplysningene vi trenger, og antatt behandlingstid er 2 arbeidsdager. Vi kontakter deg så snart vi har sett på saken din. Du vil få en egen e-post med skadenummeret ditt.');
     /** ----------- NYTT END ----------- */
-    
-    await page.getByRole('button', { name: 'Send inn' }).click();
 })
 
 
