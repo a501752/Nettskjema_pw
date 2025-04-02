@@ -272,9 +272,9 @@ test('Skademeldingskjema etter tyveri/innbrudd', async ({ page }) => {
     await page.locator('#tyveriSkader').click();
     await page.locator('#tyveriSkader').fill('Bilen er totalt ramponert');
     await page.locator('#tyveriSkader').press('Tab');
-    await page.locator('#tyveriMeldtPoliti').click();
-    await page.locator('#tyveriMeldtPoliti').fill('Ja');
-    await page.locator('#tyveriMeldtPoliti').press('Tab');
+    await page.getByText('Har du meldt fra til politiet?');
+    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+
 
     /** ----------------------------  */
     const headerSkader = page.locator('h2', { hasText: 'Skader' });
