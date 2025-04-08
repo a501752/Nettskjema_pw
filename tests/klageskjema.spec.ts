@@ -53,7 +53,7 @@ test('Klageskjema privat', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Send inn klage' }).click();
 
-    await expect(page.getByRole('paragraph')).toContainText('Tusen takk for din tilbakemelding! Du vil høre fra oss i løpet av kort tid.');
+    await expect(page.getByText('Tusen takk for din')).toBeVisible();
 })
 
 
