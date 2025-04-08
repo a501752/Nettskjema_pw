@@ -19,41 +19,30 @@ test('Klageskjema privat', async ({ page }) => {
     await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
 
     await expect(page).toHaveTitle('Klageskjema');
-    await expect(page.getByRole('heading', { name: 'Her kan du sende oss en klage' })).toBeVisible();
-
-    await page.getByRole('heading', { name: 'Her kan du sende oss en klage' }).click({
-      button: 'right'
-    });
+    await expect(page.getByRole('heading', { name: 'Klageskjema' })).toBeVisible();
+    
 
     await page.locator('#utfyltDato');
 
-    await page.locator('#segment');
     await page.locator('label').filter({ hasText: 'Privatkunde' }).locator('span').first().click();
 
-    await page.locator('#fornavn').click();
-    await page.locator('#fornavn').fill('Anders');
-    await page.locator('#fornavn').press('Tab');
-    await page.locator('#etternavn').click();
-    await page.locator('#etternavn').fill('Andersen');
-    await page.locator('#etternavn').press('Tab');
-
+    await page.getByLabel('Privatkunde').click();
     await page.locator('#adresse').click();
     await page.locator('#adresse').fill('Kugården 123');
     await page.locator('#postnr').click();
     await page.locator('#postnr').fill('1337');
 
+    await page.locator('label').filter({ hasText: /^E-post$/ }).locator('span').first().click();
+    await page.locator('#epost').click();
+    await page.locator('#epost').fill('kryKunde@fremtind.no');
+    await page.locator('#tlf').click();
+    await page.locator('#tlf').fill('99994444');
+    await page.getByRole('button', { name: 'Neste side' }).click();
+
     await page.locator('#saksnr').click();
     await page.locator('#saksnr').fill('987654321');
     await page.locator('#beskrivelse').click();
     await page.locator('#beskrivelse').fill('Alt er galt!');
-
-    await page.getByText('Hvordan vil du vi skal kontakte deg?');
-    await page.locator('label').filter({ hasText: 'Brev' }).locator('span').first().click();
-
-    await page.locator('#epost').click();
-    await page.locator('#epost').fill('kry.kunde@fremtind.no');
-    await page.locator('#tlf').click();
-    await page.locator('#tlf').fill('22334455');
     
     await expect(page.locator('#root')).toContainText('Last opp vedlegg (dokumentasjon eller lignende)');
     const fileChooserPromise = page.waitForEvent('filechooser');
@@ -61,7 +50,9 @@ test('Klageskjema privat', async ({ page }) => {
     const fileChooser = await fileChooserPromise;
     await fileChooser.setFiles(path.join(__dirname, 'sample.pdf'));
 
-    await page.getByRole('button', { name: 'Send inn skjemaet til Fremtind' }).click();
+    await expect(page.locator('#root')).toContainText('sample.pdf');
+
+    await page.getByRole('button', { name: 'Send inn klage' }).click();
 })
 
 
