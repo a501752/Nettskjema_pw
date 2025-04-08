@@ -21,7 +21,6 @@ test('Klageskjema privat', async ({ page }) => {
     await expect(page).toHaveTitle('Klageskjema');
     await expect(page.getByRole('heading', { name: 'Klageskjema' })).toBeVisible();
     
-
     await page.locator('#utfyltDato');
 
     await page.locator('label').filter({ hasText: 'Privatkunde' }).locator('span').first().click();
@@ -32,7 +31,7 @@ test('Klageskjema privat', async ({ page }) => {
     await page.locator('#postnr').click();
     await page.locator('#postnr').fill('1337');
 
-    await page.locator('label').filter({ hasText: /^E-post$/ }).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'E-post' }).locator('span').first().click();
     await page.locator('#epost').click();
     await page.locator('#epost').fill('kryKunde@fremtind.no');
     await page.locator('#tlf').click();
