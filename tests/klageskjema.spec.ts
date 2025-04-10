@@ -21,18 +21,18 @@ test('Klageskjema privat', async ({ page }) => {
     await expect(page).toHaveTitle('Klageskjema');
     await expect(page.getByRole('heading', { name: 'Klageskjema' })).toBeVisible();
     
+    const headerKontaktinformasjon = page.locator('h2', { hasText: 'Kontaktinformasjon' });
+    await expect(headerKontaktinformasjon).toBeVisible();
+
     await page.locator('#utfyltDato');
 
     await page.locator('#segment');
     await page.locator('label').filter({ hasText: 'Privatkunde' }).locator('span').first().click();
 
-    await page.getByLabel('Privatkunde').click();
+    await page.getByText('Privatkunde').click();
 
-    await page.locator('#fornavn').click();
-    await page.locator('#fornavn').fill('Anders');
-    await page.locator('#etternavn').click();
-    await page.locator('#etternavn').fill('And');
-
+    await page.getByLabel('Fullt navn').click();
+    await page.getByLabel('Fullt navn').fill('Anders And');
     await page.locator('#adresse').click();
     await page.locator('#adresse').fill('Andedammen 123');
     await page.locator('#postnr').click();
@@ -40,11 +40,20 @@ test('Klageskjema privat', async ({ page }) => {
 
     await page.locator('#kommunikasjon');
     await page.locator('label').filter({ hasText: 'E-post' }).locator('span').first().click();
+
     await page.locator('#epost').click();
-    await page.locator('#epost').fill('kryKunde@fremtind.no');
+    await page.locator('#epost').fill('kunde@fremtind.no');
     await page.locator('#tlf').click();
     await page.locator('#tlf').fill('99887766');
     
+    const headerKlageDokumentasjon = page.locator('h2', { hasText: 'Om klagen og dokumentasjon' });
+    await expect(headerKlageDokumentasjon).toBeVisible();
+
+    await page.locator('#saksnr').click();
+    await page.locator('#saksnr').fill('654321');
+    await page.locator('#beskrivelse').click();
+    await page.locator('#beskrivelse').fill('Dårligere kollektivtilbud; færre avganger og dyrere billetter.');
+
     await expect(page.locator('#root')).toContainText('Last opp vedlegg (dokumentasjon eller lignende)');
     const fileChooserPromise = page.waitForEvent('filechooser');
     await page.getByRole('button', { name: 'Velg filer' }).click();
@@ -55,7 +64,7 @@ test('Klageskjema privat', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Send inn klage' }).click();
 
-    await expect(page.getByText('Tusen takk for din')).toBeVisible();
+    await expect(page.getByText('Tusen takk for din tilbakemelding!')).toBeVisible();
 })
 
 
