@@ -31,8 +31,6 @@ test('Klageskjema privat', async ({ page }) => {
 
     await page.getByText('Privatkunde').click();
 
-    await page.getByLabel('Fullt navn').click();
-    await page.getByLabel('Fullt navn').fill('Anders And');
     await page.locator('#adresse').click();
     await page.locator('#adresse').fill('Andedammen 123');
     await page.locator('#postnr').click();
@@ -46,6 +44,9 @@ test('Klageskjema privat', async ({ page }) => {
     await page.locator('#tlf').click();
     await page.locator('#tlf').fill('99887766');
     
+    await page.getByRole('button', { name: 'Neste side' }).click();
+
+
     const headerKlageDokumentasjon = page.locator('h2', { hasText: 'Om klagen og dokumentasjon' });
     await expect(headerKlageDokumentasjon).toBeVisible();
 
