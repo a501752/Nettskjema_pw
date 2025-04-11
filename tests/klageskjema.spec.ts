@@ -34,13 +34,13 @@ test('Klageskjema privat', async ({ page }) => {
     await page.locator('#adresse').click();
     await page.locator('#adresse').fill('Andedammen 123');
     await page.locator('#postnr').click();
-    await page.locator('#postnr').fill('1337');
+    await page.locator('#postnr').fill('1313');
 
     await page.locator('#kommunikasjon');
     await page.locator('label').filter({ hasText: 'E-post' }).locator('span').first().click();
 
     await page.locator('#epost').click();
-    await page.locator('#epost').fill('kunde@fremtind.no');
+    await page.locator('#epost').fill('anders@and.no');
     await page.locator('#tlf').click();
     await page.locator('#tlf').fill('99887766');
     
@@ -53,7 +53,7 @@ test('Klageskjema privat', async ({ page }) => {
     await page.locator('#saksnr').click();
     await page.locator('#saksnr').fill('654321');
     await page.locator('#beskrivelse').click();
-    await page.locator('#beskrivelse').fill('Dårligere kollektivtilbud; færre avganger og dyrere billetter.');
+    await page.locator('#beskrivelse').fill('Alt er dårlig...');
 
     await expect(page.locator('#root')).toContainText('Last opp vedlegg (dokumentasjon eller lignende)');
     const fileChooserPromise = page.waitForEvent('filechooser');
