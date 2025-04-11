@@ -85,12 +85,15 @@ test('Klageskjema bedrift', async ({ page }) => {
     await expect(page).toHaveTitle('Klageskjema');
     await expect(page.getByRole('heading', { name: 'Klageskjema' })).toBeVisible();
     
+    const headerKontaktinformasjon = page.locator('h2', { hasText: 'Kontaktinformasjon' });
+    await expect(headerKontaktinformasjon).toBeVisible();
+
     await page.locator('#utfyltDato');
 
     await page.locator('#segment');
     await page.locator('label').filter({ hasText: 'Bedriftskunde' }).locator('span').first().click();
 
-    await page.getByLabel('Bedriftskunde').click();
+    await page.getByText('Bedriftskunde').click();
 
     await page.locator('#orgNummer').click();
     await page.locator('#orgNummer').fill('549536883');
@@ -102,29 +105,29 @@ test('Klageskjema bedrift', async ({ page }) => {
     await page.locator('#postnr').click();
     await page.locator('#postnr').fill('5011');
 
+    await page.locator('#kommunikasjon');
+    await page.locator('label').filter({ hasText: 'E-post' }).locator('span').first().click();
+
+    await page.locator('#epost').click();
+    await page.locator('#epost').fill('anders@and.no');
+    await page.locator('#tlf').click();
+    await page.locator('#tlf').fill('99887766');
+    
+    await page.getByRole('button', { name: 'Neste side' }).click();
+
+
+    const headerOmKlagen = page.locator('h2', { hasText: 'Om klagen og dokumentasjon' });
+    await expect(headerOmKlagen).toBeVisible();
+
     await page.locator('#saksnr').click();
     await page.locator('#saksnr').fill('654321');
 
     await page.locator('#beskrivelse').click();
     await page.locator('#beskrivelse').fill('Jeg er misfornøyd med alt!');
 
-    await page.locator('label').filter({ hasText: 'E-post' }).locator('span').first().click();
-    await page.locator('#epost').click();
-    await page.locator('#epost').fill('krykunde@fremtind.no');
-    await page.locator('#tlf').click();
-    await page.locator('#tlf').fill('99994444');
-    
-    await expect(page.locator('#root')).toContainText('Last opp vedlegg (dokumentasjon eller lignende)');
-    const fileChooserPromise = page.waitForEvent('filechooser');
-    await page.getByRole('button', { name: 'Velg filer' }).click();
-    const fileChooser = await fileChooserPromise;
-    await fileChooser.setFiles(path.join(__dirname, 'sample.pdf'));
+    await page.getByRole('button', { name: 'Send inn klage' }).click();
 
-    await expect(page.locator('#root')).toContainText('sample.pdf');
-
-    await page.getByRole('button', { name: 'Send inn skjemaet til Fremtind' }).click();
-
-    await expect(page.getByText('Tusen takk for din')).toBeVisible();
+    await expect(page.getByText('Tusen takk for din tilbakemelding!')).toBeVisible();
 })
 
 function fileURLToPath(url: string): string {
