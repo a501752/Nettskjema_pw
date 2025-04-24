@@ -130,6 +130,76 @@ test('Klageskjema bedrift', async ({ page }) => {
     await expect(page.getByText('Tusen takk for din tilbakemelding!')).toBeVisible();
 })
 
+
+test('Klageskjema privat m/mellomlagring', async ({ page }) => {
+  
+    await page.goto('https://nettskjema.test.fremtind.no/skjema/katalog/klageskjema');
+
+    await page.getByRole('button', { name: 'Start utfylling' }).click();
+    await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('textbox', { name: 'Fødselsnummer' }).fill('25878899302');
+    await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('textbox', { name: 'Engangskode' }).click();
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('textbox', { name: 'Engangskode' }).fill('otp');
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('textbox', { name: 'Ditt BankID-passord' }).fill('qwer1234');
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
+
+    await expect(page).toHaveTitle('Klageskjema');
+    await expect(page.getByRole('heading', { name: 'Klageskjema' })).toBeVisible();
+    
+    const headerKontaktinformasjon = page.locator('h2', { hasText: 'Kontaktinformasjon' });
+    await expect(headerKontaktinformasjon).toBeVisible();
+
+    await page.locator('#utfyltDato');
+
+    await page.locator('#segment');
+    await page.locator('label').filter({ hasText: 'Privatkunde' }).locator('span').first().click();
+
+    await page.getByText('Privatkunde').click();
+
+    await page.locator('#adresse').click();
+    await page.locator('#adresse').fill('Andedammen 123');
+    await page.locator('#postnr').click();
+    await page.locator('#postnr').fill('1313');
+    await page.locator('#epost').click();
+    await page.locator('#epost').fill('anders@and.no');
+    
+    await page.getByRole('button', { name: 'Lagre og fortsett senere' }).click();
+
+    await expect(page.getByText('Svarene dine er lagret')).toBeVisible();
+
+    await page.getByRole('button', { name: 'Logg ut' }).click();
+
+    /** */
+  
+    await page.goto('https://nettskjema.test.fremtind.no/skjema/katalog/klageskjema');
+
+    await page.getByRole('button', { name: 'Start utfylling' }).click();
+    await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('textbox', { name: 'Fødselsnummer' }).fill('25878899302');
+    await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('textbox', { name: 'Engangskode' }).click();
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('textbox', { name: 'Engangskode' }).fill('otp');
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('textbox', { name: 'Ditt BankID-passord' }).fill('qwer1234');
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
+
+    await expect(page).toHaveTitle('Klageskjema');
+    await expect(page.getByRole('heading', { name: 'Klageskjema' })).toBeVisible();
+    
+    const headerKontaktinformasjon2 = page.locator('h2', { hasText: 'Kontaktinformasjon' });
+    await expect(headerKontaktinformasjon2).toBeVisible();
+
+    /**
+     * Verifiser at feltene i “Kontaktinformasjon” ligger der ferdig utfylt med dataen som ble lagt inn i steg 1
+     */
+    await expect(page.locator('#adresse')).toHaveText(/Andedammen 123/);
+    await expect(page.locator('#postnr')).toHaveText(/1313/);
+    await expect(page.locator('#epost')).toHaveText(/anders@and.no/);
+    await expect(page.locator('#tlf')).toHaveText(/99887766/);
+
+})
+
+
 function fileURLToPath(url: string): string {
     return nodeFileURLToPath(url);
 }
