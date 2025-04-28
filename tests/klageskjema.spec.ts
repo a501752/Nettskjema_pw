@@ -192,10 +192,10 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
     /**
      * Verifiser at feltene i “Kontaktinformasjon” ligger der ferdig utfylt med dataen som ble lagt inn i steg 1
      */
-    await expect(page.locator('#adresse')).toHaveText(/Andedammen 123/);
-    await expect(page.locator('#postnr')).toHaveText(/1313/);
-    await expect(page.locator('#epost')).toHaveText(/anders@and.no/);
-    await expect(page.locator('#tlf')).toHaveText(/99887766/);
+    await expect(page.locator('#adresse')).toHaveText('Andedammen 123');
+    await expect(page.locator('#postnr')).toHaveText('1313');
+    await expect(page.locator('#epost')).toHaveText('anders@and.no');
+    await expect(page.locator('#tlf')).toHaveText('99887766');
 
 })
 
