@@ -199,6 +199,20 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
     await expect(page.locator('#epost')).toHaveText('anders@and.no');
     await expect(page.locator('#tlf')).toHaveText('99887766');
 
+    await page.getByRole('button', { name: 'Neste side' }).click();
+
+    const headerOmKlagen = page.locator('h2', { hasText: 'Om klagen og dokumentasjon' });
+    await expect(headerOmKlagen).toBeVisible();
+
+    await page.locator('#saksnr').click();
+    await page.locator('#saksnr').fill('654321');
+
+    await page.locator('#beskrivelse').click();
+    await page.locator('#beskrivelse').fill('Jeg er misfornøyd med alt!');
+
+    await page.getByRole('button', { name: 'Send inn klage' }).click();
+
+    await expect(page.getByText('Tusen takk for din tilbakemelding!')).toBeVisible();
 })
 
 
