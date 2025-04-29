@@ -163,6 +163,8 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
     await page.locator('#postnr').fill('1313');
     await page.locator('#epost').click();
     await page.locator('#epost').fill('anders@and.no');
+    await page.locator('#tlf').click();
+    await page.locator('#tlf').fill('99887766');
     
     await page.getByRole('button', { name: 'Lagre og fortsett senere' }).click();
 
