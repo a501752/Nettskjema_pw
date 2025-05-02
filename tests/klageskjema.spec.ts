@@ -212,7 +212,8 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Send inn klage' }).click();
 
-    await expect(page.getByText('Tusen takk for din tilbakemelding!')).toBeVisible();
+    await expect(page.getByText('Tusen takk for din')).toBeVisible();
+    await expect(page.locator('#root')).toContainText('Tusen takk for din tilbakemelding! Du vil høre fra oss i løpet av kort tid.');
 })
 
 
