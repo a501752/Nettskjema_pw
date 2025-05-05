@@ -161,6 +161,10 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
     await page.locator('#adresse').fill('Andedammen 123');
     await page.locator('#postnr').click();
     await page.locator('#postnr').fill('1313');
+
+    await page.locator('#kommunikasjon');
+    await page.locator('label').filter({ hasText: 'E-post' }).locator('span').first().click();
+
     await page.locator('#epost').click();
     await page.locator('#epost').fill('anders@and.no');
     await page.locator('#tlf').click();
@@ -171,6 +175,8 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
     await expect(page.getByText('Svarene dine er lagret')).toBeVisible();
 
     await page.getByRole('button', { name: 'Logg ut' }).click();
+
+    await expect(page.getByText('Du er logget ut.')).toBeVisible();
 
     /** */
   
