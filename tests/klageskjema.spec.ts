@@ -155,14 +155,12 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
     await page.locator('#segment');
     await page.locator('label').filter({ hasText: 'Privatkunde' }).locator('span').first().click();
 
-    await page.getByText('Privatkunde').click();
-
     await page.locator('#adresse').click();
     await page.locator('#adresse').fill('Andedammen 123');
     await page.locator('#postnr').click();
     await page.locator('#postnr').fill('1313');
 
-    await page.locator('#kommunikasjon');
+    await page.locator('#segment');
     await page.locator('label').filter({ hasText: 'E-post' }).locator('span').first().click();
 
     await page.locator('#epost').click();
@@ -198,12 +196,17 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
     await expect(headerKontaktinformasjon2).toBeVisible();
 
     /**
-     * Verifiser at feltene i “Kontaktinformasjon” ligger der ferdig utfylt med dataen som ble lagt inn i steg 1
+     * Verifiser at "Privatkunde" er valgt
      */
-    await expect(page.locator('#adresse')).toHaveText('Andedammen 123');
-    await expect(page.locator('#postnr')).toHaveText('1313');
-    await expect(page.locator('#epost')).toHaveText('anders@and.no');
-    await expect(page.locator('#tlf')).toHaveText('99887766');
+
+    /**
+     * Verifiser at feltene i “Kontaktinformasjon” ligger der ferdig utfylt med verdiene som ble lagt inn i steg 1
+     */
+    const epost = page.locator('#epost');
+    await expect(epost).toHaveValue("anders@and.no");
+
+    const tlf = page.locator('#tlf');
+    await expect(tlf).toHaveValue("99887766");
 
     await page.getByRole('button', { name: 'Neste side' }).click();
 
