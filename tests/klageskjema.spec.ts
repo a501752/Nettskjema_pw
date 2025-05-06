@@ -145,6 +145,7 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
     await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
 
     await expect(page).toHaveTitle('Klageskjema');
+
     if (await severalItems.isVisible()) {
         await severalItems.first().click();
     }
@@ -192,6 +193,7 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
     await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
 
     await expect(page).toHaveTitle('Klageskjema');
+
     if (await severalItems.isVisible()) {
         await severalItems.first().click();
     }
