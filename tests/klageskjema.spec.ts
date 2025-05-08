@@ -131,8 +131,6 @@ test('Klageskjema bedrift', async ({ page }) => {
 
 test('Klageskjema privat m/mellomlagring', async ({ page }) => {
 
-    const severalItems = page.getByRole('link', { name: 'klageskjema' })
-
     await page.goto('https://nettskjema.test.fremtind.no/skjema/katalog/klageskjema');
 
     await page.getByRole('button', { name: 'Start utfylling' }).click();
@@ -146,8 +144,8 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
 
     await expect(page).toHaveTitle('Klageskjema');
 
-    if (await severalItems.isVisible()) {
-        await severalItems.first().click();
+    if (await page.getByRole('link', { name: 'klageskjema' }).first().isVisible()) {
+        await page.getByRole('link', { name: 'klageskjema' }).first().click();
     }
 
     const headerKontaktinformasjon = page.locator('h2', { hasText: 'Kontaktinformasjon' });
@@ -194,8 +192,8 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
 
     await expect(page).toHaveTitle('Klageskjema');
 
-    if (await severalItems.isVisible()) {
-        await severalItems.first().click();
+    if (await page.getByRole('link', { name: 'klageskjema' }).first().isVisible()) {
+        await page.getByRole('link', { name: 'klageskjema' }).first().click();
     }
     
     const headerKontaktinformasjon2 = page.locator('h2', { hasText: 'Kontaktinformasjon' });
