@@ -19,7 +19,11 @@ test('Klageskjema privat', async ({ page }) => {
     await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
 
     await expect(page).toHaveTitle('Klageskjema');
-    
+
+    if (await page.getByRole('link', { name: 'klageskjema' }).first().isVisible()) {
+        await page.getByRole('link', { name: 'klageskjema' }).first().click();
+    }
+
     const headerKontaktinformasjon = page.locator('h2', { hasText: 'Kontaktinformasjon' });
     await expect(headerKontaktinformasjon).toBeVisible();
 
@@ -82,7 +86,11 @@ test('Klageskjema bedrift', async ({ page }) => {
     await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
 
     await expect(page).toHaveTitle('Klageskjema');
-    
+
+    if (await page.getByRole('link', { name: 'klageskjema' }).first().isVisible()) {
+        await page.getByRole('link', { name: 'klageskjema' }).first().click();
+    }
+
     const headerKontaktinformasjon = page.locator('h2', { hasText: 'Kontaktinformasjon' });
     await expect(headerKontaktinformasjon).toBeVisible();
 
