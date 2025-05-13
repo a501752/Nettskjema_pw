@@ -238,6 +238,66 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
 })
 
 
+/**
+ * Test av klageskjema med forventet feil pga opplasting av for stor fil
+ */
+test('Klageskjema privat "bad path"', async ({ page }) => {
+
+    await page.goto('https://nettskjema.test.fremtind.no/skjema/katalog/klageskjema');
+
+    await page.getByRole('button', { name: 'Start utfylling' }).click();
+    await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('textbox', { name: 'Fødselsnummer' }).fill('25878899302');
+    await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('textbox', { name: 'Engangskode' }).click();
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('textbox', { name: 'Engangskode' }).fill('otp');
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('textbox', { name: 'Ditt BankID-passord' }).fill('qwer1234');
+    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
+
+    await expect(page).toHaveTitle('Klageskjema');
+
+    if (await page.getByRole('link', { name: 'klageskjema' }).first().isVisible()) {
+        await page.getByRole('link', { name: 'klageskjema' }).first().click();
+    }
+
+    const headerKontaktinformasjon = page.locator('h2', { hasText: 'Kontaktinformasjon' });
+    await expect(headerKontaktinformasjon).toBeVisible();
+
+    await page.locator('#utfyltDato');
+
+    await page.locator('#segment');
+    await page.locator('label').filter({ hasText: 'Privatkunde' }).locator('span').first().click();
+
+    await page.locator('#adresse').click();
+    await page.locator('#adresse').fill('Andedammen 123');
+    await page.locator('#postnr').click();
+    await page.locator('#postnr').fill('1313');
+
+    await page.locator('#kommunikasjon');
+    await page.locator('label').filter({ hasText: 'E-post' }).locator('span').first().click();
+
+    await page.locator('#epost').click();
+    await page.locator('#epost').fill('anders@and.no');
+
+    await page.locator('#tlf').click();
+    await page.locator('#tlf').fill('99887766');
+
+    await page.getByRole('button', { name: 'Neste side' }).click();
+    
+    const headerOmKlagen = page.locator('h2', { hasText: 'Om klagen og dokumentasjon' });
+    await expect(headerOmKlagen).toBeVisible();
+    
+    await page.locator('#saksnr').click();
+    await page.locator('#saksnr').fill('654321');
+
+    await page.locator('#beskrivelse').click();
+    await page.locator('#beskrivelse').fill('Jeg er misfornøyd med alt!');
+
+    await page.locator('#vedlegg').click();
+
+
+})
+
 function fileURLToPath(url: string): string {
     return nodeFileURLToPath(url);
 }
