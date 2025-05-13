@@ -280,7 +280,7 @@ test('Klageskjema privat "bad path"', async ({ page }) => {
     await page.locator('#epost').fill('anders@and.no');
 
     await page.locator('#tlf').click();
-    await page.locator('#tlf').fill('99887766');
+    await page.locator('#tlf').fill('87654321');
 
     await page.getByRole('button', { name: 'Neste side' }).click();
     
@@ -293,7 +293,12 @@ test('Klageskjema privat "bad path"', async ({ page }) => {
     await page.locator('#beskrivelse').click();
     await page.locator('#beskrivelse').fill('Jeg er misfornøyd med alt!');
 
-    await page.locator('#vedlegg').click();
+    await page.locator('#vedlegg');
+    const fileChooserPromise = page.waitForEvent('filechooser');
+    await page.getByRole('button', { name: 'Velg filer' }).click();
+    const fileChooser = await fileChooserPromise;
+    await fileChooser.setFiles(path.join(__dirname, '10mb.pdf'));
+
 
 
 })
