@@ -305,6 +305,7 @@ test('Klageskjema privat "bad path"', async ({ page }) => {
  * Test av klageskjema med timeout
 */
 test('Klageskjema privat time-out', async ({ page }) => {
+    test.setTimeout(999000);
 
     await page.goto('https://nettskjema.test.fremtind.no/skjema/katalog/klageskjema');
 
