@@ -305,7 +305,7 @@ test('Klageskjema privat "bad path"', async ({ page }) => {
  * Test av klageskjema med timeout
 */
 test('Klageskjema privat time-out', async ({ page }) => {
-    test.setTimeout(999000);
+    test.setTimeout(60000); // Set timeout to 1 minute (i.e. 60 seconds)
 
     await page.goto('https://nettskjema.test.fremtind.no/skjema/katalog/klageskjema');
 
@@ -353,8 +353,8 @@ test('Klageskjema privat time-out', async ({ page }) => {
     const headerKlageDokumentasjon = page.locator('h2', { hasText: 'Om klagen og dokumentasjon' });
     await expect(headerKlageDokumentasjon).toBeVisible();
 
-    /** La testen stå og vente i 15-16 minutter uten at det gjøres noe */
-    await page.waitForTimeout(960000); // waits for 16 minutes (i.e. 960 seconds)
+    /** La testen stå og vente i 1 minutt uten at det gjøres noe */
+    await page.waitForTimeout(60000); // waits for 1 minute (60 seconds)
 
     await page.locator('#saksnr').click();
     await page.locator('#saksnr').fill('654321');
