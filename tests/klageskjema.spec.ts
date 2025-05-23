@@ -5,6 +5,7 @@ import { fileURLToPath as nodeFileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+/** Testcase 1 */
 test('Klageskjema privat', async ({ page }) => {
   
     await page.goto('https://nettskjema.test.fremtind.no/skjema/katalog/klageskjema');
@@ -71,7 +72,7 @@ test('Klageskjema privat', async ({ page }) => {
     await expect(page.getByText('Tusen takk for din tilbakemelding!')).toBeVisible();
 })
 
-
+/** Testcase 2 */
 test('Klageskjema bedrift', async ({ page }) => {
   
     await page.goto('https://nettskjema.test.fremtind.no/skjema/katalog/klageskjema');
@@ -136,7 +137,7 @@ test('Klageskjema bedrift', async ({ page }) => {
     await expect(page.getByText('Tusen takk for din tilbakemelding!')).toBeVisible();
 })
 
-
+/** Testcase 3 */
 test('Klageskjema privat m/mellomlagring', async ({ page }) => {
 
     await page.goto('https://nettskjema.test.fremtind.no/skjema/katalog/klageskjema');
@@ -239,6 +240,7 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
 
 
 /**
+ * Testcase 4
  * Test av klageskjema med forventet feil pga opplasting av for stor fil
  */
 test('Klageskjema privat "bad path"', async ({ page }) => {
@@ -302,8 +304,9 @@ test('Klageskjema privat "bad path"', async ({ page }) => {
 
 
 /**
+ * Testcase 5
  * Test av klageskjema med timeout
-*/
+ */
 test('Klageskjema privat time-out', async ({ page }) => {
     test.setTimeout(60000); // Set timeout to 1 minute (i.e. 60 seconds)
 
