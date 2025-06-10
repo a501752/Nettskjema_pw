@@ -46,37 +46,38 @@ test('Meld skade happycase', async ({ page }) => {
     await page.getByTestId('jkl-datepicker__trigger').click();
     await page.getByTestId('jkl-datepicker__input').fill('20.05.2025');
 
-    await page.locator('#hvordanskade').click();
-    await page.locator('#hvordanskade').fill('Naboens tre veltet over bilen vår etter et lynnedslag');
-    await page.locator('#hvordanskade').press('Tab');
+    await page.locator('#hvordanskade').first().click();
+    await page.locator('#hvordanskade').first().fill('Naboens tre veltet over bilen vår etter et lynnedslag');
+    await page.locator('#hvordanskade').first().press('Tab');
 
-    await page.getByRole('button', { name: '+ Legg til' }).click();
+    await page.getByRole('button', { name: 'Legg til' }).click();
 
     await page.locator('#omSkaden');
 
-    await page.locator('#hvaErSkadet').click();
-    await page.locator('#hvaErSkadet').fill('Bilen');
-    await page.locator('#hvaErSkadet').press('Tab');
+    await page.locator('html').click();
+    await page.locator('#hvaErSkadet').nth(1).click();
+    await page.locator('#hvaErSkadet').nth(1).fill('Bilen');
+    await page.locator('#hvaErSkadet').nth(1).press('Tab');
 
-    await page.locator('#fabrikat').click();
-    await page.locator('#fabrikat').fill('Volvo');
-    await page.locator('#fabrikat').press('Tab');
+    await page.locator('#fabrikat').nth(1).click();
+    await page.locator('#fabrikat').nth(1).fill('Volvo');
+    await page.locator('#fabrikat').nth(1).press('Tab');
 
-    await page.locator('#type').click();
-    await page.locator('#type').fill('V90 Stasjonsvogn');
-    await page.locator('#type').press('Tab');
+    await page.locator('#type').nth(1).click();
+    await page.locator('#type').nth(1).fill('V90 Stasjonsvogn');
+    await page.locator('#type').nth(1).press('Tab');
 
-    await page.locator('#aarKjopt').click();
-    await page.locator('#aarKjopt').fill('2023');
-    await page.locator('#aarKjopt').press('Tab');
+    await page.locator('#aarKjopt').nth(1).click();
+    await page.locator('#aarKjopt').nth(1).fill('2023');
+    await page.locator('#aarKjopt').nth(1).press('Tab');
 
-    await page.locator('#aarLaget').click();
-    await page.locator('#aarLaget').fill('2022');
-    await page.locator('#aarLaget').press('Tab');
+    await page.locator('#aarLaget').nth(1).click();
+    await page.locator('#aarLaget').nth(1).fill('2022');
+    await page.locator('#aarLaget').nth(1).press('Tab');
 
-    await page.locator('#nyPris').click();
-    await page.locator('#nyPris').fill('729000');
-    await page.locator('#nyPris').press('Tab');
+    await page.locator('#nyPris').nth(1).click();
+    await page.locator('#nyPris').nth(1).fill('729000');
+    await page.locator('#nyPris').nth(1).press('Tab');
 
     await page.getByRole('button', { name: 'Fortsett' }).click();
 
