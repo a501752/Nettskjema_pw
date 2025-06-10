@@ -46,15 +46,12 @@ test('Meld skade happycase', async ({ page }) => {
     await page.getByTestId('jkl-datepicker__trigger').click();
     await page.getByTestId('jkl-datepicker__input').fill('20.05.2025');
 
-    await page.locator('#hvordanskade').first().click();
-    await page.locator('#hvordanskade').first().fill('Naboens tre veltet over bilen vår etter et lynnedslag');
-    await page.locator('#hvordanskade').first().press('Tab');
-
-    await page.getByRole('button', { name: 'Legg til' }).click();
+    await page.locator('#hvordanskade').click();
+    await page.locator('#hvordanskade').fill('Naboens tre veltet over bilen vår etter et lynnedslag');
+    await page.locator('#hvordanskade').press('Tab');
 
     await page.locator('#omSkaden');
 
-    await page.locator('html').click();
     await page.locator('#hvaErSkadet').nth(1).click();
     await page.locator('#hvaErSkadet').nth(1).fill('Bilen');
     await page.locator('#hvaErSkadet').nth(1).press('Tab');
@@ -64,7 +61,7 @@ test('Meld skade happycase', async ({ page }) => {
     await page.locator('#fabrikat').nth(1).press('Tab');
 
     await page.locator('#type').nth(1).click();
-    await page.locator('#type').nth(1).fill('V90 Stasjonsvogn');
+    await page.locator('#type').nth(1).fill('V90');
     await page.locator('#type').nth(1).press('Tab');
 
     await page.locator('#aarKjopt').nth(1).click();
@@ -80,38 +77,22 @@ test('Meld skade happycase', async ({ page }) => {
     await page.locator('#nyPris').nth(1).press('Tab');
 
     await page.getByRole('button', { name: 'Fortsett' }).click();
+ 
+    const page1Promise = page.waitForEvent('popup');
+    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'meld-skade.pdf' }).click();
+    const page1 = await page1Promise;
 
-    await page.getByText('Les innhold før signering');
-
-    /**
-    const fileChooserPromise = page.waitForEvent('filechooser');
-    await page.getByRole('button', { name: 'Velg filer' }).click();
-    const fileChooser = await fileChooserPromise;
-    await fileChooser.setFiles(path.join(__dirname, 'meld-skade.pdf'));
-
-    await expect(page.locator('#root')).toContainText('sampleJPG.jpg');
-     */
-
-
-
-    const downloadPromise = page.waitForEvent('download');
-    await page.getByText('Download file').click();
-    const download = await downloadPromise;
-    await page.locator('meld-skade.pdf').click();
-    
+    const page2Promise = page.waitForEvent('popup');
+    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'meld-skade.pdf' }).click();
+    const page2 = await page2Promise;
+    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().locator('label span').first().click();
+    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Start signering' }).click();
+    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').fill('otp');
+    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
+    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByLabel('Ditt BankID-passord').fill('qwer1234');
+    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
+    await expect(page.getByText('Ditt krav er nå sendt inn og')).toBeVisible();
     await page.getByText('Innholdet er forstått og jeg er klar til å signere.').check();
-
-    await page.getByRole('button', { name: 'Start signering' }).click();
-    await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').fill('otp');
-    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
-    await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Ditt BankID-passord').click();
-    await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Ditt BankID-passord').fill('qwer1234');
-    await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
-
-
-    await page.getByRole('button', { name: 'Signering utført' }).click();
-
-    await expect(page.getByRole('paragraph')).toContainText('Ditt krav er nå sendt inn');
 })
 
 function fileURLToPath(url: string): string {
