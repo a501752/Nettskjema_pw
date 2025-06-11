@@ -22,8 +22,8 @@ test('Meld skade happycase', async ({ page }) => {
 
     await expect(page).toHaveTitle('Meld skade');
 
-    const headerInformasjon = page.locator('h2', { hasText: 'Meld skade' });
-    await expect(headerInformasjon).toBeVisible();
+    const headerInformasjon3 = page.locator('h3', { hasText: 'Forsikringstaker' });
+    await expect(headerInformasjon3).toBeVisible();
 
     await page.locator('#fornavn').click();
     await page.locator('#fornavn').fill('Kry');
@@ -52,29 +52,29 @@ test('Meld skade happycase', async ({ page }) => {
 
     await page.locator('#omSkaden');
 
-    await page.locator('#hvaErSkadet').nth(1).click();
-    await page.locator('#hvaErSkadet').nth(1).fill('Bilen');
-    await page.locator('#hvaErSkadet').nth(1).press('Tab');
+    await page.locator('#hvaErSkadet').nth(0).click();
+    await page.locator('#hvaErSkadet').nth(0).fill('Bilen');
+    await page.locator('#hvaErSkadet').nth(0).press('Tab');
 
-    await page.locator('#fabrikat').nth(1).click();
-    await page.locator('#fabrikat').nth(1).fill('Volvo');
-    await page.locator('#fabrikat').nth(1).press('Tab');
+    await page.locator('#fabrikat').nth(0).click();
+    await page.locator('#fabrikat').nth(0).fill('Volvo');
+    await page.locator('#fabrikat').nth(0).press('Tab');
 
-    await page.locator('#type').nth(1).click();
-    await page.locator('#type').nth(1).fill('V90');
-    await page.locator('#type').nth(1).press('Tab');
+    await page.locator('#type').nth(0).click();
+    await page.locator('#type').nth(0).fill('V90');
+    await page.locator('#type').nth(0).press('Tab');
 
-    await page.locator('#aarKjopt').nth(1).click();
-    await page.locator('#aarKjopt').nth(1).fill('2023');
-    await page.locator('#aarKjopt').nth(1).press('Tab');
+    await page.locator('#aarKjopt').nth(0).click();
+    await page.locator('#aarKjopt').nth(0).fill('2023');
+    await page.locator('#aarKjopt').nth(0).press('Tab');
 
-    await page.locator('#aarLaget').nth(1).click();
-    await page.locator('#aarLaget').nth(1).fill('2022');
-    await page.locator('#aarLaget').nth(1).press('Tab');
+    await page.locator('#aarLaget').nth(0).click();
+    await page.locator('#aarLaget').nth(0).fill('2022');
+    await page.locator('#aarLaget').nth(0).press('Tab');
 
-    await page.locator('#nyPris').nth(1).click();
-    await page.locator('#nyPris').nth(1).fill('729000');
-    await page.locator('#nyPris').nth(1).press('Tab');
+    await page.locator('#nyPris').nth(0).click();
+    await page.locator('#nyPris').nth(0).fill('729000');
+    await page.locator('#nyPris').nth(0).press('Tab');
 
     await page.getByRole('button', { name: 'Fortsett' }).click();
  
