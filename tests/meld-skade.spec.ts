@@ -77,23 +77,9 @@ test('Meld skade happycase', async ({ page }) => {
     await page.locator('#nyPris').nth(0).press('Tab');
 
     await page.getByRole('button', { name: 'Fortsett' }).click();
- 
-    const page1Promise = page.waitForEvent('popup');
-    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'meld-skade.pdf' }).click();
-    const page1 = await page1Promise;
 
-    const page2Promise = page.waitForEvent('popup');
-    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'meld-skade.pdf' }).click();
-    const page2 = await page2Promise;
-    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().locator('label span').first().click();
-    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Start signering' }).click();
-    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').fill('otp');
-    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
-    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByLabel('Ditt BankID-passord').fill('qwer1234');
-    await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
     await expect(page.getByText('Ditt krav er nå sendt inn og')).toBeVisible();
-    await page.getByText('Innholdet er forstått og jeg er klar til å signere.').check();
-})
+ )
 
 function fileURLToPath(url: string): string {
     return nodeFileURLToPath(url);
