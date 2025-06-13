@@ -76,6 +76,32 @@ test('Meld skade happycase', async ({ page }) => {
     await page.locator('#nyPris').nth(0).fill('729000');
     await page.locator('#nyPris').nth(0).press('Tab');
 
+    await page.getByRole('button', { name: 'Legg til' }).click();
+
+    await page.locator('#hvaErSkadet').nth(0).click();
+    await page.locator('#hvaErSkadet').nth(0).fill('Tilhengeren');
+    await page.locator('#hvaErSkadet').nth(0).press('Tab');
+
+    await page.locator('#fabrikat').nth(0).click();
+    await page.locator('#fabrikat').nth(0).fill('Gaupen');
+    await page.locator('#fabrikat').nth(0).press('Tab');
+
+    await page.locator('#type').nth(0).click();
+    await page.locator('#type').nth(0).fill('F0720T');
+    await page.locator('#type').nth(0).press('Tab');
+
+    await page.locator('#aarKjopt').nth(0).click();
+    await page.locator('#aarKjopt').nth(0).fill('2013');
+    await page.locator('#aarKjopt').nth(0).press('Tab');
+
+    await page.locator('#aarLaget').nth(0).click();
+    await page.locator('#aarLaget').nth(0).fill('2013');
+    await page.locator('#aarLaget').nth(0).press('Tab');
+
+    await page.locator('#nyPris').nth(0).click();
+    await page.locator('#nyPris').nth(0).fill('14000');
+    await page.locator('#nyPris').nth(0).press('Tab');
+
     await page.getByRole('button', { name: 'Fortsett' }).click();
 
     await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('heading', { name: 'Signing', exact: true }).click();
