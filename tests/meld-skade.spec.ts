@@ -78,29 +78,29 @@ test('Meld skade happycase', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Legg til' }).click();
 
-    await page.locator('#hvaErSkadet').nth(0).click();
-    await page.locator('#hvaErSkadet').nth(0).fill('Tilhengeren');
-    await page.locator('#hvaErSkadet').nth(0).press('Tab');
+    await page.locator('#hvaErSkadet').nth(1).click();
+    await page.locator('#hvaErSkadet').nth(1).fill('Tilhengeren');
+    await page.locator('#hvaErSkadet').nth(1).press('Tab');
 
-    await page.locator('#fabrikat').nth(0).click();
-    await page.locator('#fabrikat').nth(0).fill('Gaupen');
-    await page.locator('#fabrikat').nth(0).press('Tab');
+    await page.locator('#fabrikat').nth(1).click();
+    await page.locator('#fabrikat').nth(1).fill('Gaupen');
+    await page.locator('#fabrikat').nth(1).press('Tab');
 
-    await page.locator('#type').nth(0).click();
-    await page.locator('#type').nth(0).fill('F0720T');
-    await page.locator('#type').nth(0).press('Tab');
+    await page.locator('#type').nth(1).click();
+    await page.locator('#type').nth(1).fill('F0720T');
+    await page.locator('#type').nth(1).press('Tab');
 
-    await page.locator('#aarKjopt').nth(0).click();
-    await page.locator('#aarKjopt').nth(0).fill('2013');
-    await page.locator('#aarKjopt').nth(0).press('Tab');
+    await page.locator('#aarKjopt').nth(1).click();
+    await page.locator('#aarKjopt').nth(1).fill('2013');
+    await page.locator('#aarKjopt').nth(1).press('Tab');
 
-    await page.locator('#aarLaget').nth(0).click();
-    await page.locator('#aarLaget').nth(0).fill('2013');
-    await page.locator('#aarLaget').nth(0).press('Tab');
+    await page.locator('#aarLaget').nth(1).click();
+    await page.locator('#aarLaget').nth(1).fill('2013');
+    await page.locator('#aarLaget').nth(1).press('Tab');
 
-    await page.locator('#nyPris').nth(0).click();
-    await page.locator('#nyPris').nth(0).fill('14000');
-    await page.locator('#nyPris').nth(0).press('Tab');
+    await page.locator('#nyPris').nth(1).click();
+    await page.locator('#nyPris').nth(1).fill('14000');
+    await page.locator('#nyPris').nth(1).press('Tab');
 
     await page.getByRole('button', { name: 'Fortsett' }).click();
 
@@ -117,7 +117,7 @@ test('Meld skade happycase', async ({ page }) => {
     await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Next' }).click();
     await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByLabel('Your BankID password').fill('qwer1234');
     await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Next' }).click();
-    await expect(page.getByText('Ditt krav er nå sendt inn og')).toBeVisible();
+    await expect(page.getByText('Ditt krav er nå sendt inn og du vil høre fra oss så snart vi har fått sett på saken.')).toBeVisible();
 })
 
 function fileURLToPath(url: string): string {
