@@ -109,6 +109,7 @@ test('Meld skade happycase', async ({ page }) => {
     const page2Promise = page.waitForEvent('popup');
     await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'meld-skade.pdf' }).click();
     const page2 = await page2Promise;
+    await page2.close();
 
     await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByText('Content is understood and I').click();
     await page.locator('iframe[title="Signering"]').contentFrame().locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Start signing' }).click();
