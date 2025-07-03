@@ -10,7 +10,7 @@ test('Kunde melder yrkesskade', async ({ page }) => {
   
     await page.goto('https://nettskjema.test.fremtind.no/skjema/katalog/bm-yrkesskade-yrkessykdom');
 
-    await expect(page).toHaveTitle('Meld krav - Yrkesskade eller yrkessykdom');
+    await expect(page).toHaveTitle('Meld krav - Meld yrkesskade/-sykdom');
 
     await page.locator('For å starte utfyllingen, må du logge inn med BankID.');
     
@@ -86,8 +86,8 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('#Kontonummer').click();
     await page.locator('#Kontonummer').fill('28870893037');
 
-    await page.locator('#typeAnsettelse').click();
-    await page.locator('#typeAnsettelse').fill('Fast');
+    await page.getByTestId('jkl-select__button').click();
+    await page.getByRole('option', { name: '→Fast' }).click();
 
     await page.locator('#fulltidHeltid');
     await page.locator('label').filter({ hasText: 'Deltidsstilling' }).locator('span').first().click();
@@ -108,13 +108,13 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('#aarslonnFremTilSkaden').fill('400000');
 
     await page.getByText('Er arbeidstaker medlem av Folketrygden?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Familieforhold da arbeidstaker ble skadet');
-    await page.locator('label').filter({hasText: 'Samboer'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Samboer' }).locator('span').first().click();
 
     await page.getByText('Forsørger arbeidstaker barn?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.locator('#antallBarn').click();
     await page.locator('#antallBarn').fill('2');
@@ -131,21 +131,21 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.getByText('Hva har skjedd?');
     await page.locator('label').filter({hasText: 'Yrkesskade'}).locator('span').first().click();
 
-    await page.locator('#datoSkade').click();
+    await page.locator('#datoSkade');
     await page.getByTestId('jkl-datepicker__trigger').click();
-    await page.getByTestId('jkl-datepicker__input').fill('20.03.2025');
+    await page.getByLabel('2. juli', { exact: true }).click();
 
     await page.locator('#klokkeslettSkade').click();
-    await page.locator('#klokkeslettSkade').fill('ca 15:30');
+    await page.locator('#klokkeslettSkade').fill('13:37');
 
     await page.locator('#adresseSkadested').click();
-    await page.locator('#adresseSkadested').fill('Smuget 13');
+    await page.locator('#adresseSkadested').fill('Skadeveien 13');
 
     await page.locator('#postnummerSkadested').click();
-    await page.locator('#postnummerSkadested').fill('1313');
+    await page.locator('#postnummerSkadested').fill('3475');
 
     await page.getByText('Hvor skjedde skaden?');
-    await page.locator('label').filter({hasText: 'På vei til/fra arbeid'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'På vei til/fra arbeid' }).locator('span').first().click();
 
     await page.getByText('Skyldes skaden en trafikkulykke?');
     await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
@@ -217,7 +217,7 @@ test('Kunde melder yrkesskade', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Send inn' }).click();
 
-    await expect(page.getByText('Tusen takk for din tilbakemelding!')).toBeVisible();
+    await expect(page.getByText('Skjemaet ble sendt!')).toBeVisible();
 })
 
 
