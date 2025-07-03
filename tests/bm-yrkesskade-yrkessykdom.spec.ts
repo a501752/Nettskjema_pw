@@ -133,7 +133,7 @@ test('Kunde melder yrkesskade', async ({ page }) => {
 
     await page.locator('#datoSkade');
     await page.getByTestId('jkl-datepicker__trigger').click();
-    await page.getByLabel('2. juli', { exact: true }).click();
+    await page.getByLabel('2. juli 2025', { exact: true }).click();
 
     await page.locator('#klokkeslettSkade').click();
     await page.locator('#klokkeslettSkade').fill('13:37');
@@ -213,7 +213,7 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.getByText('Har arbeidstaker meldt fra til selskapet?');
     await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
 
-    await page.getByText('Bekreftelse fra arbeidstaker').check();
+    await page.locator('#bekreftelseArbeidstaker').check();
 
     await page.getByRole('button', { name: 'Send inn' }).click();
 
