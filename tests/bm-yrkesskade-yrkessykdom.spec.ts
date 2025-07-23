@@ -87,7 +87,7 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('#Kontonummer').fill('28870893037');
 
     await page.getByTestId('jkl-select__button').click();
-    await page.getByRole('option', { name: '→Fast' }).click();
+    await page.getByRole('option', { name: 'Fast' }).click();
 
     await page.locator('#fulltidHeltid');
     await page.locator('label').filter({ hasText: 'Deltidsstilling' }).locator('span').first().click();
@@ -133,7 +133,7 @@ test('Kunde melder yrkesskade', async ({ page }) => {
 
     await page.locator('#datoSkade');
     await page.getByTestId('jkl-datepicker__trigger').click();
-    await page.getByLabel('2. juli 2025', { exact: true }).click();
+    await page.getByLabel('02.07.2025', { exact: true }).click();
 
     await page.locator('#klokkeslettSkade').click();
     await page.locator('#klokkeslettSkade').fill('13:37');
