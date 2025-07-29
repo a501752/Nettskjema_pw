@@ -114,7 +114,7 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('label').filter({ hasText: 'Samboer' }).locator('span').first().click();
 
     await page.getByText('Forsørger arbeidstaker barn?');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
+    await page.getByText('Ja').nth(1).click();
 
     await page.locator('#antallBarn').click();
     await page.locator('#antallBarn').fill('2');
@@ -131,9 +131,8 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.getByText('Hva har skjedd?');
     await page.locator('label').filter({hasText: 'Yrkesskade'}).locator('span').first().click();
 
-    await page.locator('#datoSkade');
     await page.getByTestId('jkl-datepicker__trigger').click();
-    await page.getByLabel('02.07.2025', { exact: true }).click();
+    await page.getByTestId('jkl-datepicker__input').fill('02.07.2025');
 
     await page.locator('#klokkeslettSkade').click();
     await page.locator('#klokkeslettSkade').fill('13:37');
