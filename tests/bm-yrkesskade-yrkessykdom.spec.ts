@@ -177,19 +177,19 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('#personligVerneutstyr').fill('Hjelm');
 
     await page.getByText('Var maskinen/utstyret sikret på noen måte?');
-    await page.locator('label').filter({hasText: 'Uaktuelt'}).locator('span').first().click();
+    await page.locator('label').filter({hasText: 'Uaktuelt'}).locator('span').nth(4).click();
 
     await page.getByText('Fungerte vernet/sikringen som forventet?');
-    await page.locator('label').filter({hasText: 'Uaktuelt'}).locator('span').first().click();
+    await page.locator('label').filter({hasText: 'Uaktuelt'}).locator('span').nth(5).click();
 
     await page.getByText('Skjedde skaden som følge av brudd på arbeidsinstruks?');
-    await page.locator('label').filter({hasText: 'Nei'}).locator('span').first().click();
+    await page.locator('label').filter({hasText: 'Nei'}).locator('span').nth(6).click();
 
     await page.getByText('Førte skaden til dødsfall?');
-    await page.locator('label').filter({hasText: 'Nei'}).locator('span').first().click();
+    await page.locator('label').filter({hasText: 'Nei'}).locator('span').nth(7).click();
 
     await page.getByText('Har du hatt sykefravær?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({hasText: 'Ja'}).locator('span').nth(8).click();
 
     await page.locator('#lengdeSykefravaer').click();
     await page.locator('#lengdeSykefravaer').fill('20.03.2025 - 23.03.2025');
