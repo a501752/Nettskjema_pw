@@ -156,7 +156,7 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('#forsikringsselskapBilforsikring').fill('Fremtind');
 
     await page.getByText('Har arbeidstaker meldt fra om ulykken til selskapet?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({hasText: 'Ja'}).locator('span').nth(2).click();
 
     await page.locator('#hvaGjordeArbeidstakeren').click();
     await page.locator('#hvaGjordeArbeidstakeren').fill('Sikret skadestedet og dirigerte trafikken utenom');
@@ -171,10 +171,10 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('#hvilkenKroppsdel').fill('Nesen');
 
     await page.getByText('Ble personlig verneutstyr brukt? (valgfritt)');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({hasText: 'Ja'}).locator('span').nth(3).click();
 
-    await page.locator('#oppfolgingssporsmaalVerneustyr').click();
-    await page.locator('#oppfolgingssporsmaalVerneustyr').fill('Hjelm');
+    await page.locator('#personligVerneutstyr').click();
+    await page.locator('#personligVerneutstyr').fill('Hjelm');
 
     await page.getByText('Var maskinen/utstyret sikret på noen måte?');
     await page.locator('label').filter({hasText: 'Uaktuelt'}).locator('span').first().click();
