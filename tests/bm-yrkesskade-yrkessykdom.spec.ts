@@ -169,12 +169,12 @@ test('Kunde melder yrkesskade', async ({ page }) => {
 
     await page.locator('#hvilkenKroppsdel').click();
     await page.locator('#hvilkenKroppsdel').fill('Nesen');
-
+    
     await page.getByText('Ble personlig verneutstyr brukt? (valgfritt)');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').nth(3).click();
+    await page.locator('[id="jkl-field-group-\\:r69\\:"] label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
-    await page.locator('#personligVerneutstyr').click();
-    await page.locator('#personligVerneutstyr').fill('Hjelm');
+    await page.locator('#oppfolgingssporsmaalVerneustyr').click();
+    await page.locator('#oppfolgingssporsmaalVerneustyr').fill('Hjelm');
 
     await page.getByText('Var maskinen/utstyret sikret på noen måte?');
     await page.locator('label').filter({hasText: 'Uaktuelt'}).locator('span').nth(4).click();
