@@ -13,7 +13,6 @@ test('Klageskjema privat', async ({ page }) => {
     await page.getByRole('button', { name: 'Start utfylling' }).click();
     await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('textbox', { name: 'Fødselsnummer' }).fill('25878899302');
     await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
-    await page.getByRole('button', { name: 'Bekreft innlogging' }).click();
     await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').click();
     await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').fill('otp');
     await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
@@ -82,7 +81,6 @@ test('Klageskjema bedrift', async ({ page }) => {
     await page.getByRole('button', { name: 'Start utfylling' }).click();
     await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('textbox', { name: 'Fødselsnummer' }).fill('25878899302');
     await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
-    await page.getByRole('button', { name: 'Bekreft innlogging' }).click();
     await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').click();
     await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').fill('otp');
     await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
@@ -149,7 +147,6 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
     await page.getByRole('button', { name: 'Start utfylling' }).click();
     await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('textbox', { name: 'Fødselsnummer' }).fill('25878899302');
     await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
-    await page.getByRole('button', { name: 'Bekreft innlogging' }).click();
     await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').click();
     await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').fill('otp');
     await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
@@ -199,7 +196,6 @@ test('Klageskjema privat m/mellomlagring', async ({ page }) => {
     await page.getByRole('button', { name: 'Start utfylling' }).click();
     await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('textbox', { name: 'Fødselsnummer' }).fill('25878899302');
     await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
-    await page.getByRole('button', { name: 'Bekreft innlogging' }).click();
     await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').click();
     await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').fill('otp');
     await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
@@ -258,7 +254,6 @@ test('Klageskjema privat "bad path"', async ({ page }) => {
     await page.getByRole('button', { name: 'Start utfylling' }).click();
     await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('textbox', { name: 'Fødselsnummer' }).fill('25878899302');
     await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
-    await page.getByRole('button', { name: 'Bekreft innlogging' }).click();
     await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').click();
     await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').fill('otp');
     await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
@@ -325,7 +320,6 @@ test.skip('Klageskjema privat time-out', async ({ page }) => {
     await page.getByRole('button', { name: 'Start utfylling' }).click();
     await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('textbox', { name: 'Fødselsnummer' }).fill('25878899302');
     await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
-    await page.getByRole('button', { name: 'Bekreft innlogging' }).click();
     await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').click();
     await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').fill('otp');
     await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
