@@ -18,7 +18,6 @@ test('Kunde melder yrkesskade', async ({ page }) => {
 
     await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('textbox', { name: 'Fødselsnummer' }).fill('25878899302');
     await page.locator('iframe[title="Innlogging"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
-    await page.getByRole('button', { name: 'Bekreft innlogging' }).click();
     await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').click();
     await page.locator('iframe[title="BankID"]').contentFrame().getByLabel('Skriv inn engangskoden din').fill('otp');
     await page.locator('iframe[title="BankID"]').contentFrame().getByRole('button', { name: 'Neste' }).click();
@@ -156,7 +155,7 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('#forsikringsselskapBilforsikring').fill('Fremtind');
 
     await page.getByText('Har arbeidstaker meldt fra om ulykken til selskapet?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').nth(2).click();
+    await page.locator('label').filter({hasText: 'Ja'}).locator('span').nth(1).click();
 
     await page.locator('#hvaGjordeArbeidstakeren').click();
     await page.locator('#hvaGjordeArbeidstakeren').fill('Sikret skadestedet og dirigerte trafikken utenom');
@@ -171,10 +170,10 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('#hvilkenKroppsdel').fill('Nesen');
     
     await page.getByText('Ble personlig verneutstyr brukt? (valgfritt)');
-    await page.locator('[id="jkl-field-group-\\:r69\\:"] label').filter({ hasText: 'Ja' }).locator('span').first().click();
+    await page.locator('label').filter({hasText: 'Ja'}).locator('span').nth(2).click();
 
     await page.locator('#oppfolgingssporsmaalVerneustyr').click();
-    await page.locator('#oppfolgingssporsmaalVerneustyr').fill('Hjelm');
+    await page.locator('#oppfolgingssporsmaalVerneustyr').fill('Knebeskyttere');
 
     await page.getByText('Var maskinen/utstyret sikret på noen måte?');
     await page.locator('label').filter({hasText: 'Uaktuelt'}).locator('span').nth(4).click();
