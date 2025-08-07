@@ -146,7 +146,7 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('label').filter({ hasText: 'På vei til/fra arbeid' }).locator('span').first().click();
 
     await page.getByText('Skyldes skaden en trafikkulykke?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja'}).locator('span').first().click();
 
     await page.locator('#regnr').click();
     await page.locator('#regnr').fill('ZY12345');
@@ -155,7 +155,7 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('#forsikringsselskapBilforsikring').fill('Fremtind');
 
     await page.getByText('Har arbeidstaker meldt fra om ulykken til selskapet?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').nth(1).click();
+    await page.locator('label').filter({ hasText: 'Ja'}).locator('span').first().click();
 
     await page.locator('#hvaGjordeArbeidstakeren').click();
     await page.locator('#hvaGjordeArbeidstakeren').fill('Sikret skadestedet og dirigerte trafikken utenom');
@@ -170,25 +170,25 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('#hvilkenKroppsdel').fill('Nesen');
     
     await page.getByText('Ble personlig verneutstyr brukt? (valgfritt)');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').nth(2).click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.locator('#oppfolgingssporsmaalVerneustyr').click();
     await page.locator('#oppfolgingssporsmaalVerneustyr').fill('Knebeskyttere');
 
     await page.getByText('Var maskinen/utstyret sikret på noen måte?');
-    await page.locator('label').filter({hasText: 'Uaktuelt'}).locator('span').nth(4).click();
+    await page.locator('label').filter({ hasText: 'Uaktuelt'}).locator('span').first().click();
 
     await page.getByText('Fungerte vernet/sikringen som forventet?');
-    await page.locator('label').filter({hasText: 'Uaktuelt'}).locator('span').nth(5).click();
+    await page.locator('label').filter({ hasText: 'Uaktuelt'}).locator('span').first().click();
 
     await page.getByText('Skjedde skaden som følge av brudd på arbeidsinstruks?');
-    await page.locator('label').filter({hasText: 'Nei'}).locator('span').nth(6).click();
+    await page.locator('label').filter({ hasText: 'Nei'}).locator('span').first().click();
 
     await page.getByText('Førte skaden til dødsfall?');
-    await page.locator('label').filter({hasText: 'Nei'}).locator('span').nth(7).click();
+    await page.locator('label').filter({ hasText: 'Nei'}).locator('span').first().click();
 
     await page.getByText('Har du hatt sykefravær?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').nth(8).click();
+    await page.locator('label').filter({ hasText: 'Ja'}).locator('span').first().click();
 
     await page.locator('#lengdeSykefravaer').click();
     await page.locator('#lengdeSykefravaer').fill('20.03.2025 - 23.03.2025');
@@ -200,16 +200,16 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await expect(headerTilleggsopplysninger).toBeVisible();
 
     await page.getByText('Er saken meldt til NAV?');
-    await page.locator('label').filter({hasText: 'Nei'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Nei'}).locator('span').first().click();
 
     await page.getByText('Har arbeidstaker andre personforsikringer?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja'}).locator('span').first().click();
 
     await page.locator('#hvilketSelskap').click();
     await page.locator('#hvilketSelskap').fill('Fremtind');
 
     await page.getByText('Har arbeidstaker meldt fra til selskapet?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja'}).locator('span').first().click();
 
     await page.locator('#bekreftelseArbeidstaker').check();
 
