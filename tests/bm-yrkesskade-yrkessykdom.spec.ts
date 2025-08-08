@@ -113,7 +113,7 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('label').filter({ hasText: 'Samboer' }).locator('span').first().click();
 
     await page.getByText('Forsørger arbeidstaker barn?');
-    await page.getByText('Ja').nth(1).click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.locator('#antallBarn').click();
     await page.locator('#antallBarn').fill('2');
@@ -140,7 +140,7 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('#adresseSkadested').fill('Skadeveien 13');
 
     await page.locator('#postnummerSkadested').click();
-    await page.locator('#postnummerSkadested').fill('3475');
+    await page.locator('#postnummerSkadested').fill('3475');        
 
     await page.getByText('Hvor skjedde skaden?');
     await page.locator('label').filter({ hasText: 'På vei til/fra arbeid' }).locator('span').first().click();
