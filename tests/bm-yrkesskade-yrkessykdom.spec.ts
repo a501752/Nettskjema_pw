@@ -146,7 +146,7 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('label').filter({ hasText: 'På vei til/fra arbeid' }).locator('span').nth(1).click();
 
     await page.getByText('Skyldes skaden en trafikkulykke?');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(2).click();
 
     await page.locator('#regnr').click();
     await page.locator('#regnr').fill('ZY12345');
@@ -154,11 +154,8 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('#forsikringsselskapBilforsikring').click();
     await page.locator('#forsikringsselskapBilforsikring').fill('Fremtind');
 
-    await page.getByText('Har arbeidstaker meldt fra om ulykken til selskapet');
-    await page.locator('label').filter({ hasText: 'Ja'}).locator('span').first().click();
-    /**
-    await page.locator('[id="jkl-input-\\:r6i\\:"] > div > .jkl-radio-button__label > .jkl-radio-button__dot').first().click();
-     */
+    await page.getByText('Har arbeidstaker meldt fra om ulykken til selskapet?');
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(3).click();
 
     await page.locator('#hvaGjordeArbeidstakeren').click();
     await page.locator('#hvaGjordeArbeidstakeren').fill('Sikret skadestedet og dirigerte trafikken utenom');
@@ -172,8 +169,8 @@ test('Kunde melder yrkesskade', async ({ page }) => {
     await page.locator('#hvilkenKroppsdel').click();
     await page.locator('#hvilkenKroppsdel').fill('Nesen');
     
-    await page.getByText('Ble personlig verneutstyr brukt? (valgfritt)');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(1).click();
+    await page.getByText('Ble personlig verneutstyr brukt?');
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(3).click();
 
     await page.locator('#oppfolgingssporsmaalVerneustyr').click();
     await page.locator('#oppfolgingssporsmaalVerneustyr').fill('Knebeskyttere');
