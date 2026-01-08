@@ -58,7 +58,7 @@ test('Helse', async ({ page }) => {
     await page.locator('#epost').fill('kry@kunde.no');
     await page.locator('#epost').press('Tab');
 
-    page.getByLabel('Jeg bekrefter at jeg har lest Orientering om helseerklæringen').check();
+    await page.getByLabel('Jeg bekrefter at jeg har lest Orientering om helseerklæringen').check();
 
     await page.getByRole('button', { name: 'Fortsett' }).click();
 
@@ -86,25 +86,25 @@ test('Helse', async ({ page }) => {
     await page.locator('#spm20').press('Tab');
 
     await page.locator('#spm21');
-    await page.locator('#spm21').fill('80');
+    await page.locator('#spm21').fill('70');
     await page.locator('#spm21').press('Tab');
 
     await page.getByText('Har du noen fysiske eller psykiske funksjonshemninger eller medfødte lidelser');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.locator('#spm23');
     await page.locator('#spm23').fill('Smerter i korsryggen');
     await page.locator('#spm23').press('Tab');
 
-    await page.getByText('Er du for tiden fullt arbeidsdyktig?');
-    await page.locator('label').filter({hasText: 'Nei'}).locator('span').first().click();
+    await page.getByText('Er du for tiden fullt arbeidsdyktig');
+    await page.locator('label').filter({ hasText: 'Nei' }).locator('span').first().click();
 
     await page.locator('#spm25');
     await page.locator('#spm25').fill('Det gjør så ufattelig vondt :-/');
     await page.locator('#spm25').press('Tab');
 
     await page.getByText('Har du i løpet av de siste 10 årene vært til behandling eller kontroll');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     /** Gruppe start */
     /** Hva er årsaken (diagnose) */
@@ -136,63 +136,63 @@ test('Helse', async ({ page }) => {
 
     /** Diabetes */
     await page.getByText('Diabetes?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
     await page.getByText('Når fikk du påvist diabetes?').fill('April 2025');
     await page.getByText('Behandlende lege (navn og sted)').fill('Dr Øvel, Toten');
     await page.getByText('Har du fortsatt sykdommen?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('HIV?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
     await page.getByText('Når fikk du påvist HIV?').fill('April 2025');
     await page.getByText('Har du blitt behandlet for sykdommen?').fill('Javisst');
     await page.getByText('Hvor følges du opp for sykdommen (navn og sted)').fill('Rikshospitalet, Oslo');
 
     /** TODO */
     await page.getByText('Hjerte-/karsykdom?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter( {hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Høyt blodtrykk?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter( {hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Høyt kolesterol?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Migrene, gjentatt eller langvarig hodepine?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Hjernesykdom');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Astma eller annen lungesykdom');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Kreft?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Nyresykdom?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Leversykdom?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Fordøyelsessykdom?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Sykdom i nervesystemet?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Hepatitt?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Revmatisme, leddgikt eller annen autoimmun sykdom?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Annen sykdom av alvorlig karakter?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
     await page.getByText('Har du, eller har du i løpet av de siste 10 årene hatt, angst, depresjon, utbrenthet, adferdsforstyrrelser, spiseforstyrrelser eller andre psykiske lidelser, eller har du gått til samtaler eller behandling hos psykolog eller psykiater?');
-    await page.locator('label').filter({hasText: 'Ja'}).locator('span').first().click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
 
 
