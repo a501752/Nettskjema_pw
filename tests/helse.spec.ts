@@ -37,7 +37,7 @@ test('Helse', async ({ page }) => {
     const headerInnledning = page.locator('h2', { hasText: 'Innledning' });
     await expect(headerInnledning).toBeVisible();
 
-    await page.getByText('Hvilke forsikringer har du kjøpt?');
+    await page.getByText('Hvilke forsikringer har du kjøpt');
     await page.locator('label').filter({ hasText: 'Kritisk sykdom'}).check();
 
     await page.getByText('Om den forsikrede');
@@ -64,13 +64,13 @@ test('Helse', async ({ page }) => {
 
     await page.getByText('Arbeid og personlig');
 
-    await page.getByText('Har du bodd sammenhengende i Norge de siste 5 årene?'); /** spm3 */
+    await page.getByText('Har du bodd sammenhengende i Norge de siste 5 årene'); /** spm3 */
     await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
 
-    await page.getByText('Jeg er'); /** spm7 */
+    await page.getByText('Jeg er'); /** spm7 = 1 */
     await page.locator('label').filter({ hasText: 'i jobb' }).locator('span').first().click();
 
-    await page.getByText('Er du'); /** spm8 */
+    await page.getByText('Er du'); /** spm8 == 1 */
     await page.locator('label').filter({ hasText: 'ansatt' }).locator('span').first().click();
 
     await page.locator('#spm9');
