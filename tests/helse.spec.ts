@@ -89,8 +89,8 @@ test('Helse', async ({ page }) => {
     await page.locator('#spm21').fill('70');
     await page.locator('#spm21').press('Tab');
 
-    page.getByText('Har du noen fysiske eller psykiske funksjonshemninger');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
+    await page.getByText('Har du noen fysiske eller psykiske funksjonshemninger');  /** spm21 == 1 */
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();  
 
     await page.locator('#spm23');
     await page.locator('#spm23').fill('Smerter i korsryggen');
@@ -100,7 +100,7 @@ test('Helse', async ({ page }) => {
     await page.locator('label').filter({ hasText: 'Nei' }).locator('span').first().click();
 
     await page.locator('#spm25');
-    await page.locator('#spm25').fill('Det gjør så ufattelig vondt...');
+    await page.locator('#spm25').fill('Det gjør så ufattelig vondt i ryggen :-(');
     await page.locator('#spm25').press('Tab');
 
     await page.getByText('Har du i løpet av de siste 10 årene vært til behandling eller kontroll');
