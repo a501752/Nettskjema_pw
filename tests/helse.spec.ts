@@ -89,15 +89,15 @@ test('Helse', async ({ page }) => {
     await page.locator('#spm21').fill('70');
     await page.locator('#spm21').press('Tab');
 
-    await page.getByText('Har du noen fysiske eller psykiske funksjonshemninger');  /** spm21 == 1 */
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(4).click();  
+    await page.getByText('Har du noen fysiske eller psykiske funksjonshemninger');  /** spm22 == 1 */
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(3).click();  
 
     await page.locator('#spm23');
     await page.locator('#spm23').fill('Smerter i korsryggen');
     await page.locator('#spm23').press('Tab');
 
     await page.getByText('Er du for tiden fullt arbeidsdyktig');
-    await page.locator('label').filter({ hasText: 'Nei' }).locator('span').nth(6).click();
+    await page.locator('label').filter({ hasText: 'Nei' }).locator('span').nth(4).click();
 
     await page.locator('#spm25');
     await page.locator('#spm25').fill('Det gjør så ufattelig vondt i ryggen :-(');
