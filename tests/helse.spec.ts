@@ -105,7 +105,7 @@ test('Helse', async ({ page }) => {
     await page.locator('#spm25').press('Tab');
 
     await page.getByText('Har du i løpet av de siste 10 årene vært til behandling eller kontroll');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(6).click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(5).click();
 
     /** Gruppe start */
     /** Hva er årsaken (diagnose) */
@@ -136,12 +136,16 @@ test('Helse', async ({ page }) => {
     /** TODO Svar JA på alle */
 
     /** Diabetes */
-    await page.getByText('Diabetes?');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').first().click();
+    await page.getByText('Diabetes');
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(1).click();
+
+    /** Gruppe start */
+    /** Hva er årsaken (diagnose) */
     await page.getByText('Når fikk du påvist diabetes?').fill('April 2025');
     await page.getByText('Behandlende lege').fill('Dr Øvel, Toten');
     await page.getByText('Har du fortsatt sykdommen?');
     await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(2).click();
+    /** Gruppe slutt */
 
     await page.getByText('HIV?');
     await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(3).click();
@@ -155,68 +159,68 @@ test('Helse', async ({ page }) => {
     await page.getByText('Når hadde du sykdommen?').fill('I forrige måned');
     await page.getByText('Behandlende lege (navn og sted)').fill('Dr Acula');
     await page.getByText('Har du fortsatt sykdommen?');
-    await page.locator('label').filter( {hasText: 'Ja' }).locator('span').nth(5).click();
+    await page.locator('label').filter( {hasText: 'Ja' }).locator('span').nth(11).click();
 
     await page.getByText('Høyt blodtrykk?');
-    await page.locator('label').filter( {hasText: 'Ja' }).locator('span').nth(6).click();
+    await page.locator('label').filter( {hasText: 'Ja' }).locator('span').nth(12).click();
     await page.getByText('Når var du sist til kontroll av blodtrykket?').fill('Etter sommerferien');
     await page.getByText('Hva var resultatet av siste kontrollen').fill('Blodtrykket var til å leve med');
     await page.getByText('Behandlende lege').fill('Dr Olsen');
     await page.getByText('Behandles du fortsatt?');
-    await page.locator('label').filter( {hasText: 'Ja' }).locator('span').nth(7).click();
+    await page.locator('label').filter( {hasText: 'Ja' }).locator('span').nth(13).click();
 
     await page.getByText('Høyt kolesterol?');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(8).click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(14).click();
     await page.getByText('Når var du sist til kontroll av kolesterolet?').fill('Før sommerferien');
     await page.getByText('Hva var resultatet av siste kontrollen').fill('Legen sa at kolesterolet var greit :-)');
     await page.getByText('Behandlende lege').fill('Dr Hansen');
     await page.getByText('Behandles du fortsatt?');
-    await page.locator('label').filter( {hasText: 'Ja' }).locator('span').nth(9).click();
+    await page.locator('label').filter( {hasText: 'Ja' }).locator('span').nth(15).click();
 
     await page.getByText('Migrene, gjentatt eller langvarig hodepine?');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(10).click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(16).click();
     await page.getByText('Hvor ofte har du anfall?').fill('Ukentlig');
 
     await page.getByText('Hjernesykdom?');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(11).click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(17).click();
     await page.getByText('Hvor ofte har du anfall?').fill('Ukentlig');
     await page.getByText('Hvilken hjernesykdom (diagnose)?').fill('Epilepsi');
     await page.getByText('Når hadde du sykdommen?').fill('Sykdommen er kronisk');
     await page.getByText('Behandlende lege').fill('Dr Proktor');
     await page.getByText('Har du fortsatt sykdommen?');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(12).click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(18).click();
 
     await page.getByText('Astma eller annen lungesykdom');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(13).click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(19).click();
     await page.getByText('Hvilken lungesykdom (diagnose)').fill('Pleuritt');
     await page.getByText('Når hadde du sykdommen?').fill('I forrige måned');
     await page.getByText('Behandlende lege').fill('Dr Anker, Drammen');
     await page.getByText('Har du fortsatt sykdommen?');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(14).click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(20).click();
 
     await page.getByText('Kreft?');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(15).click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(21).click();
     await page.getByText('Hvilken type kreft (diagnose)?').fill('Hudkreft');
     await page.getByText('Når hadde du sykdommen?').fill('På forsommeren');
     await page.getByText('Behandlende lege (navn og sted)').fill('Dr Sarkom');
     await page.getByText('Har du fortsatt sykdommen?');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(16).click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(22).click();
 
     await page.getByText('Nyresykdom?');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(17).click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(23).click();
     await page.getByText('Hvilken nyresykdom (diagnose)?').fill('KNS (kronisk nyresykdom)');
     await page.getByText('Når hadde du sykdommen?').fill('I forrige måned');
     await page.getByText('Behandlende lege (navn og sted)').fill('Dr Uremi');
     await page.getByText('Har du fortsatt sykdommen?');
-    await page.locator('label').filter({ hasText: 'Nei' }).locator('span').nth(18).click();
+    await page.locator('label').filter({ hasText: 'Nei' }).locator('span').nth(24).click();
 
     await page.getByText('Leversykdom?');
-    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(19).click();
+    await page.locator('label').filter({ hasText: 'Ja' }).locator('span').nth(25).click();
     await page.getByText('Hvilken leversykdom (diagnose)?').fill('Skrumplever');
     await page.getByText('Når hadde du sykdommen?').fill('I fjor');
     await page.getByText('Behandlende lege (navn og sted)').fill('Dr Lever');
     await page.getByText('Har du fortsatt sykdommen?');
-    await page.locator('label').filter({ hasText: 'Nei' }).locator('span').nth(10).click();
+    await page.locator('label').filter({ hasText: 'Nei' }).locator('span').nth(26).click();
 
     /** Fortsetter her.... */
 
